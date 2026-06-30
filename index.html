@@ -223,12 +223,18 @@
   @media (prefers-reduced-motion: reduce){
     *{transition:none !important;}
   }
+
+  .cart-link{position:relative;display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:1.5px solid var(--linen-dark);color:var(--ink);transition:border-color .2s;}
+  .cart-link:hover{border-color:var(--clay);}
+  .cart-link svg{width:18px;height:18px;}
+  .cart-badge{position:absolute;top:-5px;right:-5px;min-width:18px;height:18px;border-radius:999px;background:var(--clay);color:#fff;font-family:'Space Grotesk',sans-serif;font-size:10.5px;font-weight:600;display:none;align-items:center;justify-content:center;padding:0 4px;}
 </style>
 </head>
 <body>
 
 <header class="site-header">
   <div class="wrap">
+    <a href="index.html" style="text-decoration:none;display:contents;">
     <div class="logo">
       <svg class="logo-mark" viewBox="0 0 100 100">
         <g transform="translate(50,50)">
@@ -245,6 +251,7 @@
       </svg>
       <div class="logo-text">Terra Floor<span>Дизайнерские полы</span></div>
     </div>
+    </a>
     <nav>
       <a href="#collections">Ламинат</a>
       <a href="terra_floor_engineered_board_concept.html">Инженерная доска</a>
@@ -253,6 +260,10 @@
     </nav>
     <div class="header-cta">
       <div class="phone">8 800 555-01-23<small>ежедневно, 9:00–21:00</small></div>
+      <a href="terra_floor_cart_checkout_concept.html" class="cart-link" aria-label="Корзина">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <span class="cart-badge" data-cart-badge>0</span>
+      </a>
       <a href="#calculator" class="btn btn-ghost-dark">Подбор пола</a>
     </div>
   </div>
@@ -494,17 +505,17 @@
       <div>
         <h4>Каталог</h4>
         <ul>
-          <li><a href="#">Village</a></li>
-          <li><a href="#">Design Collection</a></li>
-          <li><a href="#">Aqua</a></li>
+          <li><a href="terra_floor_catalog_concept.html">Ламинат</a></li>
+          <li><a href="terra_floor_engineered_board_concept.html">Инженерная доска</a></li>
+          <li><a href="terra_floor_accessories_concept.html">Аксессуары</a></li>
         </ul>
       </div>
       <div>
         <h4>Компания</h4>
         <ul>
-          <li><a href="#">О нас</a></li>
-          <li><a href="#">Доставка и оплата</a></li>
-          <li><a href="#">Дилерам</a></li>
+          <li><a href="about.html">О нас</a></li>
+          <li><a href="delivery.html">Доставка и оплата</a></li>
+          <li><a href="terra_floor_contacts_concept.html">Контакты</a></li>
         </ul>
       </div>
       <div>
@@ -518,7 +529,7 @@
     </div>
     <div class="footer-bottom">
       <span>© 2026 Terra Floor. Все права защищены.</span>
-      <span>Дизайн-концепт · v1</span>
+      <span>Сайт-каталог · v2</span>
     </div>
   </div>
 </footer>
@@ -548,5 +559,6 @@
   calcFloor();
 </script>
 
+<script src="cart.js"></script>
 </body>
 </html>
