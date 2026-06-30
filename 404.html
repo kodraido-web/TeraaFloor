@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Страница не найдена — Terra Floor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&family=Work+Sans:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1B1108; --walnut:#4A2E18; --clay:#C1652E; --clay-dark:#9C4D20;
+    --gold:#B98B3E; --linen:#F3ECDF; --linen-dark:#E8DDC8; --bark:#2B2118; --bark-soft:#5A4B3D;
+    --radius:14px; --max:1180px;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--linen);color:var(--bark);font-family:'Work Sans', sans-serif;font-size:16px;line-height:1.6;}
+  h1,h2,h3{font-family:'Fraunces', serif;font-weight:600;margin:0;color:var(--ink);}
+  .num{font-family:'Space Grotesk', sans-serif;font-weight:600;}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 32px;}
+  a{color:inherit;text-decoration:none;}
+
+  .site-header{position:sticky;top:0;z-index:50;background:rgba(243,236,223,0.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--linen-dark);}
+  .site-header .wrap{display:flex;align-items:center;justify-content:space-between;height:76px;}
+  .logo{display:flex;align-items:center;gap:10px;}
+  .logo-mark{width:34px;height:34px;}
+  .logo-text{font-family:'Fraunces', serif;font-weight:600;font-size:20px;color:var(--ink);}
+  .logo-text span{display:block;font-family:'Work Sans',sans-serif;font-weight:500;font-size:10px;letter-spacing:3px;color:var(--clay-dark);}
+  nav{display:flex;gap:28px;}
+  nav a{font-size:14px;font-weight:500;color:var(--bark-soft);}
+  nav a.active{color:var(--clay-dark);}
+  .phone{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:15px;}
+  .phone small{display:block;font-family:'Work Sans',sans-serif;font-weight:400;font-size:11px;color:var(--bark-soft);}
+
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 24px;border-radius:999px;font-size:14px;font-weight:600;cursor:pointer;border:1.5px solid transparent;transition:transform .2s, background .2s, border-color .2s;font-family:'Work Sans',sans-serif;}
+  .btn-primary{background:var(--clay);color:var(--linen);}
+  .btn-primary:hover{background:var(--clay-dark);transform:translateY(-2px);}
+  .btn-ghost-dark{border-color:var(--bark-soft);color:var(--ink);}
+  .btn-ghost-dark:hover{border-color:var(--ink);}
+  .btn-block{width:100%;}
+
+  .breadcrumb{padding:20px 0 0;font-size:13px;color:var(--bark-soft);}
+  .breadcrumb span{margin:0 6px;opacity:.5;}
+
+  .page-head{padding:14px 0 36px;}
+  .page-head h1{font-size:clamp(30px,4vw,42px);}
+  .page-head p{color:var(--bark-soft);margin-top:10px;max-width:560px;}
+
+  footer{background:var(--ink);color:#B7A88E;padding:48px 0 28px;margin-top:48px;}
+  .footer-bottom{display:flex;justify-content:space-between;font-size:12.5px;color:#7C7058;}
+
+  .cart-link{position:relative;display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:1.5px solid var(--linen-dark);color:var(--ink);transition:border-color .2s;}
+  .cart-link:hover{border-color:var(--clay);}
+  .cart-link svg{width:18px;height:18px;}
+  .cart-badge{position:absolute;top:-5px;right:-5px;min-width:18px;height:18px;border-radius:999px;background:var(--clay);color:#fff;font-family:'Space Grotesk',sans-serif;font-size:10.5px;font-weight:600;display:none;align-items:center;justify-content:center;padding:0 4px;}
+
+  @media (max-width:900px){
+    nav{display:none;}
+    .wrap{padding:0 20px;}
+  }
+
+
+  .e404-section{padding:90px 0 110px;text-align:center;}
+  .e404-mark{font-family:'Fraunces',serif;font-size:clamp(80px,14vw,140px);font-weight:600;color:var(--linen-dark);line-height:1;margin-bottom:8px;}
+  .e404-section h1{font-size:clamp(24px,3vw,32px);margin-bottom:14px;}
+  .e404-section p{color:var(--bark-soft);max-width:440px;margin:0 auto 30px;}
+  .e404-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" style="text-decoration:none;display:contents;">
+    <div class="logo">
+      <svg class="logo-mark" viewBox="0 0 100 100">
+        <g transform="translate(50,50)">
+          <rect x="-6" y="-44" width="12" height="28" rx="2" fill="#C1652E" transform="rotate(0)"/>
+          <rect x="-6" y="-44" width="12" height="28" rx="2" fill="#B98B3E" transform="rotate(45)"/>
+          <rect x="-6" y="-44" width="12" height="28" rx="2" fill="#C1652E" transform="rotate(90)"/>
+          <rect x="-6" y="-44" width="12" height="28" rx="2" fill="#B98B3E" transform="rotate(135)"/>
+          <rect x="-6" y="-44" width="12" height="28" rx="2" fill="#C1652E" transform="rotate(180)"/>
+          <rect x="-6" y="-44" width="12" height="28" rx="2" fill="#B98B3E" transform="rotate(225)"/>
+          <rect x="-6" y="-44" width="12" height="28" rx="2" fill="#C1652E" transform="rotate(270)"/>
+          <rect x="-6" y="-44" width="12" height="28" rx="2" fill="#B98B3E" transform="rotate(315)"/>
+          <circle r="13" fill="#F3ECDF"/>
+        </g>
+      </svg>
+      <div class="logo-text">Terra Floor<span>Дизайнерские полы</span></div>
+    </div>
+    </a>
+    <nav>
+      <a href="terra_floor_catalog_concept.html">Ламинат</a>
+      <a href="terra_floor_engineered_board_concept.html">Инженерная доска</a>
+      <a href="terra_floor_accessories_concept.html">Аксессуары</a>
+      <a href="terra_floor_contacts_concept.html">Контакты</a>
+    </nav>
+    <div class="phone">8 800 555-01-23<small>ежедневно, 9:00–21:00</small></div>
+      <a href="terra_floor_cart_checkout_concept.html" class="cart-link" aria-label="Корзина">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <span class="cart-badge" data-cart-badge>0</span>
+      </a>
+  </div>
+</header>
+
+<section class="e404-section">
+  <div class="wrap">
+    <div class="e404-mark">404</div>
+    <h1>Такого пола у нас, кажется, нет</h1>
+    <p>Страница не найдена — возможно, ссылка устарела или в адресе опечатка. Загляните в каталог, там точно есть на что посмотреть.</p>
+    <div class="e404-actions">
+      <a href="index.html" class="btn btn-primary">На главную</a>
+      <a href="terra_floor_catalog_concept.html" class="btn btn-ghost-dark">В каталог</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-bottom">
+      <span>© 2026 Terra Floor. Все права защищены.</span>
+      <span>404</span>
+    </div>
+  </div>
+</footer>
+
+<script src="cart.js"></script>
+</body>
+</html>
