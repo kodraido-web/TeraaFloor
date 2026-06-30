@@ -110,12 +110,18 @@
     .map-wrap{height:320px;}
     .wrap{padding:0 20px;}
   }
+
+  .cart-link{position:relative;display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:1.5px solid var(--linen-dark);color:var(--ink);transition:border-color .2s;}
+  .cart-link:hover{border-color:var(--clay);}
+  .cart-link svg{width:18px;height:18px;}
+  .cart-badge{position:absolute;top:-5px;right:-5px;min-width:18px;height:18px;border-radius:999px;background:var(--clay);color:#fff;font-family:'Space Grotesk',sans-serif;font-size:10.5px;font-weight:600;display:none;align-items:center;justify-content:center;padding:0 4px;}
 </style>
 </head>
 <body>
 
 <header class="site-header">
   <div class="wrap">
+    <a href="index.html" style="text-decoration:none;display:contents;">
     <div class="logo">
       <svg class="logo-mark" viewBox="0 0 100 100">
         <g transform="translate(50,50)">
@@ -132,6 +138,7 @@
       </svg>
       <div class="logo-text">Terra Floor<span>Дизайнерские полы</span></div>
     </div>
+    </a>
     <nav>
       <a href="terra_floor_catalog_concept.html">Ламинат</a>
       <a href="terra_floor_engineered_board_concept.html">Инженерная доска</a>
@@ -139,6 +146,10 @@
       <a href="terra_floor_contacts_concept.html" class="active">Контакты</a>
     </nav>
     <div class="phone">8 800 555-01-23<small>ежедневно, 9:00–21:00</small></div>
+      <a href="terra_floor_cart_checkout_concept.html" class="cart-link" aria-label="Корзина">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <span class="cart-badge" data-cart-badge>0</span>
+      </a>
   </div>
 </header>
 
@@ -288,5 +299,6 @@
   </div>
 </footer>
 
+<script src="cart.js"></script>
 </body>
 </html>
