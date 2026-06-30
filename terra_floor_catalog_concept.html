@@ -98,12 +98,18 @@
   @media (max-width:560px){
     .product-grid{grid-template-columns:1fr;}
   }
+
+  .cart-link{position:relative;display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:1.5px solid var(--linen-dark);color:var(--ink);transition:border-color .2s;}
+  .cart-link:hover{border-color:var(--clay);}
+  .cart-link svg{width:18px;height:18px;}
+  .cart-badge{position:absolute;top:-5px;right:-5px;min-width:18px;height:18px;border-radius:999px;background:var(--clay);color:#fff;font-family:'Space Grotesk',sans-serif;font-size:10.5px;font-weight:600;display:none;align-items:center;justify-content:center;padding:0 4px;}
 </style>
 </head>
 <body>
 
 <header class="site-header">
   <div class="wrap">
+    <a href="index.html" style="text-decoration:none;display:contents;">
     <div class="logo">
       <svg class="logo-mark" viewBox="0 0 100 100">
         <g transform="translate(50,50)">
@@ -120,6 +126,7 @@
       </svg>
       <div class="logo-text">Terra Floor<span>Дизайнерские полы</span></div>
     </div>
+    </a>
     <nav>
       <a href="terra_floor_catalog_concept.html" class="active">Ламинат</a>
       <a href="terra_floor_engineered_board_concept.html">Инженерная доска</a>
@@ -127,6 +134,10 @@
       <a href="terra_floor_contacts_concept.html">Контакты</a>
     </nav>
     <div class="phone">8 800 555-01-23<small>ежедневно, 9:00–21:00</small></div>
+      <a href="terra_floor_cart_checkout_concept.html" class="cart-link" aria-label="Корзина">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <span class="cart-badge" data-cart-badge>0</span>
+      </a>
   </div>
 </header>
 
@@ -135,15 +146,15 @@
 <div class="wrap catalog-head">
   <div>
     <h1>Каталог покрытий</h1>
-    <div class="count">Найдено 71 покрытие</div>
+    <div class="count" id="results-count">Найдено 71 покрытие</div>
   </div>
   <div class="head-controls">
     <label for="filters-toggle" class="btn btn-ghost-dark filters-toggle-btn">Фильтры</label>
-    <select>
-      <option>По популярности</option>
-      <option>Сначала дешевле</option>
-      <option>Сначала дороже</option>
-      <option>По коллекции</option>
+    <select id="sort-select">
+      <option value="popular">По популярности</option>
+      <option value="cheap">Сначала дешевле</option>
+      <option value="expensive">Сначала дороже</option>
+      <option value="collection">По коллекции</option>
     </select>
   </div>
 </div>
@@ -153,143 +164,15 @@
     <input type="checkbox" id="filters-toggle">
     <div class="catalog-layout">
 
-      <aside class="filters">
-        <div class="filter-group">
-          <h3>Коллекция</h3>
-          <label class="filter-option"><input type="checkbox" checked>EasyStep<span class="fcount">18</span></label>
-          <label class="filter-option"><input type="checkbox" checked>Design Collection<span class="fcount">21</span></label>
-          <label class="filter-option"><input type="checkbox">Forest<span class="fcount">6</span></label>
-          <label class="filter-option"><input type="checkbox">Village<span class="fcount">6</span></label>
-          <label class="filter-option"><input type="checkbox">AQUA SPC<span class="fcount">10</span></label>
-          <label class="filter-option"><input type="checkbox">AQUA Herringbone<span class="fcount">10</span></label>
-        </div>
-
-        <div class="filter-group">
-          <h3>Цена, ₽/м²</h3>
-          <div class="price-range">
-            <input type="number" placeholder="от 2 430">
-            <input type="number" placeholder="до 3 410">
-          </div>
-        </div>
-
-        <div class="filter-group">
-          <h3>Класс износостойкости</h3>
-          <label class="filter-option"><input type="checkbox" checked>AC5/33<span class="fcount">18</span></label>
-          <label class="filter-option"><input type="checkbox" checked>AC6/34<span class="fcount">33</span></label>
-          <label class="filter-option"><input type="checkbox">43 (SPC)<span class="fcount">20</span></label>
-        </div>
-
-        <div class="filter-group">
-          <h3>Толщина</h3>
-          <label class="filter-option"><input type="checkbox" checked>12 мм<span class="fcount">51</span></label>
-          <label class="filter-option"><input type="checkbox">4 мм<span class="fcount">20</span></label>
-        </div>
-
-        <div class="filter-group">
-          <h3>Тип укладки</h3>
-          <label class="filter-option"><input type="checkbox" checked>Английская ёлка<span class="fcount">42</span></label>
-          <label class="filter-option"><input type="checkbox">Палубная<span class="fcount">25</span></label>
-          <label class="filter-option"><input type="checkbox">Французская ёлка<span class="fcount">4</span></label>
-        </div>
-
-        <div class="filter-apply">
-          <a href="#" class="btn btn-primary">Применить</a>
-          <a href="#" class="btn btn-ghost-dark">Сбросить</a>
-        </div>
+      <aside class="filters" id="filters-root">
+        <!-- фильтры генерируются JS из реального набора данных -->
       </aside>
 
       <div>
-        <div class="product-grid">
-
-          <div class="cat-card">
-            <div class="cat-swatch" style="background:linear-gradient(135deg,#C1652E,#4A2E18);"><span class="cat-tag">EasyStep</span></div>
-            <div class="cat-body">
-              <div class="name">ES 185 Дуб Классик</div>
-              <div class="cat-chips"><span>AC5/33</span><span>12 мм</span></div>
-              <div class="cat-price-row"><div class="num">2 920 ₽<small> / м²</small></div><a href="#">Подробнее →</a></div>
-            </div>
-          </div>
-
-          <div class="cat-card">
-            <div class="cat-swatch" style="background:linear-gradient(135deg,#C1652E,#9C4D20);"><span class="cat-tag">EasyStep</span></div>
-            <div class="cat-body">
-              <div class="name">ES 246 Дуб Прованс</div>
-              <div class="cat-chips"><span>AC5/33</span><span>12 мм</span></div>
-              <div class="cat-price-row"><div class="num">2 670 ₽<small> / м²</small></div><a href="#">Подробнее →</a></div>
-            </div>
-          </div>
-
-          <div class="cat-card">
-            <div class="cat-swatch" style="background:linear-gradient(135deg,#C1652E,#B98B3E);"><span class="cat-tag">Design Collection</span></div>
-            <div class="cat-body">
-              <div class="name">1208, Эбби</div>
-              <div class="cat-chips"><span>AC6/34</span><span>12 мм</span></div>
-              <div class="cat-price-row"><div class="num">3 065 ₽<small> / м²</small></div><a href="#">Подробнее →</a></div>
-            </div>
-          </div>
-
-          <div class="cat-card">
-            <div class="cat-swatch" style="background:linear-gradient(135deg,#9C4D20,#B98B3E);"><span class="cat-tag">Design Collection</span></div>
-            <div class="cat-body">
-              <div class="name">DC1204, Дуб выбеленный</div>
-              <div class="cat-chips"><span>AC6/34</span><span>12 мм</span></div>
-              <div class="cat-price-row"><div class="num">3 410 ₽<small> / м²</small></div><a href="#">Подробнее →</a></div>
-            </div>
-          </div>
-
-          <div class="cat-card">
-            <div class="cat-swatch" style="background:linear-gradient(135deg,#4A2E18,#1B1108);"><span class="cat-tag">Forest</span></div>
-            <div class="cat-body">
-              <div class="name">3001, Дуб Шервудский</div>
-              <div class="cat-chips"><span>AC6/34</span><span>12 мм</span></div>
-              <div class="cat-price-row"><div class="num">3 045 ₽<small> / м²</small></div><a href="#">Подробнее →</a></div>
-            </div>
-          </div>
-
-          <div class="cat-card">
-            <div class="cat-swatch" style="background:linear-gradient(135deg,#4A2E18,#9C4D20);"><span class="cat-tag">Village</span></div>
-            <div class="cat-body">
-              <div class="name">V 1222, Oak natural</div>
-              <div class="cat-chips"><span>AC6/34</span><span>12 мм</span></div>
-              <div class="cat-price-row"><div class="num">2 430 ₽<small> / м²</small></div><a href="#">Подробнее →</a></div>
-            </div>
-          </div>
-
-          <div class="cat-card">
-            <div class="cat-swatch" style="background:linear-gradient(135deg,#B98B3E,#4A2E18);"><span class="cat-tag">Village</span></div>
-            <div class="cat-body">
-              <div class="name">V1224, Орех Канадский</div>
-              <div class="cat-chips"><span>AC6/34</span><span>12 мм</span></div>
-              <div class="cat-price-row"><div class="num">2 430 ₽<small> / м²</small></div><a href="#">Подробнее →</a></div>
-            </div>
-          </div>
-
-          <div class="cat-card">
-            <div class="cat-swatch" style="background:linear-gradient(135deg,#5B7A73,#8FA89F);"><span class="cat-tag">AQUA SPC</span></div>
-            <div class="cat-body">
-              <div class="name">AQ 106, Дуб Восточный</div>
-              <div class="cat-chips"><span>43</span><span>4 мм</span></div>
-              <div class="cat-price-row"><div class="num">2 790 ₽<small> / м²</small></div><a href="#">Подробнее →</a></div>
-            </div>
-          </div>
-
-          <div class="cat-card">
-            <div class="cat-swatch" style="background:linear-gradient(135deg,#5B7A73,#B98B3E);"><span class="cat-tag">AQUA Herringbone</span></div>
-            <div class="cat-body">
-              <div class="name">AQ205, Дуб Эннеди</div>
-              <div class="cat-chips"><span>43</span><span>4 мм</span></div>
-              <div class="cat-price-row"><div class="num">2 900 ₽<small> / м²</small></div><a href="#">Подробнее →</a></div>
-            </div>
-          </div>
-
+        <div class="product-grid" id="product-grid">
+          <!-- карточки товаров генерируются JS -->
         </div>
-
-        <div class="pagination">
-          <a href="#" class="active">1</a>
-          <a href="#">2</a>
-          <a href="#">3</a>
-          <a href="#">→</a>
-        </div>
+        <p id="empty-state" style="display:none;color:var(--bark-soft);font-size:14px;padding:32px 0;">По выбранным фильтрам ничего не найдено. Попробуйте сбросить часть условий.</p>
       </div>
     </div>
   </div>
@@ -299,10 +182,13 @@
   <div class="wrap">
     <div class="footer-bottom">
       <span>© 2026 Terra Floor. Все права защищены.</span>
-      <span>Дизайн-концепт · страница каталога</span>
+      <span>Каталог · 71 позиция, данные из прайс-листа BOHO от 08.06.2026</span>
     </div>
   </div>
 </footer>
 
+<script src="cart.js"></script>
+<script src="laminate-data.js"></script>
+<script src="catalog.js"></script>
 </body>
 </html>
