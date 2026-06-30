@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>О компании — Terra Floor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&family=Work+Sans:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1B1108; --walnut:#4A2E18; --clay:#C1652E; --clay-dark:#9C4D20;
+    --gold:#B98B3E; --linen:#F3ECDF; --linen-dark:#E8DDC8; --bark:#2B2118; --bark-soft:#5A4B3D;
+    --radius:14px; --max:1180px;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--linen);color:var(--bark);font-family:'Work Sans', sans-serif;font-size:16px;line-height:1.6;}
+  h1,h2,h3{font-family:'Fraunces', serif;font-weight:600;margin:0;color:var(--ink);}
+  .num{font-family:'Space Grotesk', sans-serif;font-weight:600;}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 32px;}
+  a{color:inherit;text-decoration:none;}
+
+  .site-header{position:sticky;top:0;z-index:50;background:rgba(243,236,223,0.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--linen-dark);}
+  .site-header .wrap{display:flex;align-items:center;justify-content:space-between;height:76px;}
+  .logo{display:flex;align-items:center;gap:10px;}
+  .logo-mark{width:34px;height:34px;}
+  .logo-text{font-family:'Fraunces', serif;font-weight:600;font-size:20px;color:var(--ink);}
+  .logo-text span{display:block;font-family:'Work Sans',sans-serif;font-weight:500;font-size:10px;letter-spacing:3px;color:var(--clay-dark);}
+  nav{display:flex;gap:28px;}
+  nav a{font-size:14px;font-weight:500;color:var(--bark-soft);}
+  nav a.active{color:var(--clay-dark);}
+  .phone{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:15px;}
+  .phone small{display:block;font-family:'Work Sans',sans-serif;font-weight:400;font-size:11px;color:var(--bark-soft);}
+
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 24px;border-radius:999px;font-size:14px;font-weight:600;cursor:pointer;border:1.5px solid transparent;transition:transform .2s, background .2s, border-color .2s;font-family:'Work Sans',sans-serif;}
+  .btn-primary{background:var(--clay);color:var(--linen);}
+  .btn-primary:hover{background:var(--clay-dark);transform:translateY(-2px);}
+  .btn-ghost-dark{border-color:var(--bark-soft);color:var(--ink);}
+  .btn-ghost-dark:hover{border-color:var(--ink);}
+  .btn-block{width:100%;}
+
+  .breadcrumb{padding:20px 0 0;font-size:13px;color:var(--bark-soft);}
+  .breadcrumb span{margin:0 6px;opacity:.5;}
+
+  .page-head{padding:14px 0 36px;}
+  .page-head h1{font-size:clamp(30px,4vw,42px);}
+  .page-head p{color:var(--bark-soft);margin-top:10px;max-width:560px;}
+
+  footer{background:var(--ink);color:#B7A88E;padding:48px 0 28px;margin-top:48px;}
+  .footer-bottom{display:flex;justify-content:space-between;font-size:12.5px;color:#7C7058;}
+
+  .cart-link{position:relative;display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:1.5px solid var(--linen-dark);color:var(--ink);transition:border-color .2s;}
+  .cart-link:hover{border-color:var(--clay);}
+  .cart-link svg{width:18px;height:18px;}
+  .cart-badge{position:absolute;top:-5px;right:-5px;min-width:18px;height:18px;border-radius:999px;background:var(--clay);color:#fff;font-family:'Space Grotesk',sans-serif;font-size:10.5px;font-weight:600;display:none;align-items:center;justify-content:center;padding:0 4px;}
+
+  @media (max-width:900px){
+    nav{display:none;}
+    .wrap{padding:0 20px;}
+  }
+
+
+  .about-hero{background:var(--ink);color:var(--linen);padding:72px 0;}
+  .about-hero .eyebrow{font-size:12px;letter-spacing:3px;font-weight:600;color:var(--gold);text-transform:uppercase;}
+  .about-hero h1{color:var(--linen);font-size:clamp(32px,4.4vw,48px);max-width:680px;margin:14px 0 18px;}
+  .about-hero p{color:#CBBCA1;max-width:560px;font-size:16.5px;}
+
+  .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;padding:56px 0;}
+  .stat-card{background:#fff;border:1px solid var(--linen-dark);border-radius:var(--radius);padding:24px;text-align:center;}
+  .stat-card .num{display:block;font-size:30px;color:var(--clay-dark);margin-bottom:6px;}
+  .stat-card .label{font-size:13px;color:var(--bark-soft);}
+
+  .story-section{padding:24px 0 72px;}
+  .story-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start;}
+  .story-grid h2{font-size:26px;margin-bottom:18px;}
+  .story-grid p{color:var(--bark-soft);font-size:15px;margin:0 0 14px;}
+  .values-list{display:flex;flex-direction:column;gap:20px;}
+  .value-item{display:flex;gap:16px;align-items:flex-start;}
+  .value-num{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:20px;color:var(--gold);flex-shrink:0;width:34px;}
+  .value-item h3{font-size:16px;margin-bottom:4px;}
+  .value-item p{font-size:14px;color:var(--bark-soft);margin:0;}
+
+  .team-cta{background:var(--linen-dark);border-radius:var(--radius);padding:40px;text-align:center;margin-bottom:72px;}
+  .team-cta h2{font-size:24px;margin-bottom:10px;}
+  .team-cta p{color:var(--bark-soft);max-width:480px;margin:0 auto 22px;}
+
+  @media (max-width:900px){
+    .stats-row{grid-template-columns:repeat(2,1fr);}
+    .story-grid{grid-template-columns:1fr;}
+  }
+
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" style="text-decoration:none;display:contents;">
+    <div class="logo">
+      <svg class="logo-mark" viewBox="0 0 100 100">
+        <g transform="translate(50,50)">
+          <rect x="-6" y="-44" width="12" height="28" rx="2" fill="#C1652E" transform="rotate(0)"/>
+          <rect x="-6" y="-44" width="12" height="28" rx="2" fill="#B98B3E" transform="rotate(45)"/>
+          <rect x="-6" y="-44" width="12" height="28" rx="2" fill="#C1652E" transform="rotate(90)"/>
+          <rect x="-6" y="-44" width="12" height="28" rx="2" fill="#B98B3E" transform="rotate(135)"/>
+          <rect x="-6" y="-44" width="12" height="28" rx="2" fill="#C1652E" transform="rotate(180)"/>
+          <rect x="-6" y="-44" width="12" height="28" rx="2" fill="#B98B3E" transform="rotate(225)"/>
+          <rect x="-6" y="-44" width="12" height="28" rx="2" fill="#C1652E" transform="rotate(270)"/>
+          <rect x="-6" y="-44" width="12" height="28" rx="2" fill="#B98B3E" transform="rotate(315)"/>
+          <circle r="13" fill="#F3ECDF"/>
+        </g>
+      </svg>
+      <div class="logo-text">Terra Floor<span>Дизайнерские полы</span></div>
+    </div>
+    </a>
+    <nav>
+      <a href="terra_floor_catalog_concept.html">Ламинат</a>
+      <a href="terra_floor_engineered_board_concept.html">Инженерная доска</a>
+      <a href="terra_floor_accessories_concept.html">Аксессуары</a>
+      <a href="terra_floor_contacts_concept.html">Контакты</a>
+    </nav>
+    <div class="phone">8 800 555-01-23<small>ежедневно, 9:00–21:00</small></div>
+      <a href="terra_floor_cart_checkout_concept.html" class="cart-link" aria-label="Корзина">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <span class="cart-badge" data-cart-badge>0</span>
+      </a>
+  </div>
+</header>
+
+<div class="wrap breadcrumb"><a href="index.html">Главная</a><span>/</span>О компании</div>
+
+<section class="about-hero">
+  <div class="wrap">
+    <span class="eyebrow">О компании</span>
+    <h1>Мы продаём не покрытие — мы продаём пол, который хочется показать гостям</h1>
+    <p>Terra Floor — магазин дизайнерского ламината, инженерной доски и аксессуаров для укладки. Работаем с авторскими декорами и тёплой природной палитрой, чтобы пол не терялся в интерьере, а становился его частью.</p>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="stats-row">
+    <div class="stat-card"><span class="num">100+</span><span class="label">позиций в каталоге</span></div>
+    <div class="stat-card"><span class="num">6</span><span class="label">коллекций ламината</span></div>
+    <div class="stat-card"><span class="num">25</span><span class="label">лет гарантии на покрытие</span></div>
+    <div class="stat-card"><span class="num">1–3</span><span class="label">дня на бесплатный замер</span></div>
+  </div>
+</div>
+
+<section class="story-section">
+  <div class="wrap story-grid">
+    <div>
+      <h2>Как мы подбираем ассортимент</h2>
+      <p>Мы не гонимся за количеством декоров ради количества. Каждая коллекция — от практичного EasyStep до премиальной инженерной доски Марканд — отобрана по двум критериям: насколько честно текстура повторяет рисунок настоящего дерева и насколько реалистично заявленный класс износостойкости выдержит ежедневную нагрузку.</p>
+      <p>Отдельно держим линейку влагостойких SPC-покрытий — для кухонь и помещений, где обычный ламинат служит недолго, не жертвуя при этом внешним видом.</p>
+      <p>Все цены и характеристики на сайте идут напрямую из прайс-листа поставщика без скрытых наценок «на коробке» — что видите, то и получаете при доставке.</p>
+    </div>
+    <div class="values-list">
+      <div class="value-item">
+        <div class="value-num">01</div>
+        <div><h3>Честная консультация</h3><p>Если ваш бюджет или задача не подходят под премиальный сегмент — прямо скажем и предложим более практичный вариант.</p></div>
+      </div>
+      <div class="value-item">
+        <div class="value-num">02</div>
+        <div><h3>Расчёт без округления «на глаз»</h3><p>Калькулятор на сайте считает упаковки по реальным размерам, а не округляет в большую сторону для своей выгоды.</p></div>
+      </div>
+      <div class="value-item">
+        <div class="value-num">03</div>
+        <div><h3>Подбор под помещение, не «вообще»</h3><p>Кухня, прихожая, спальня — у каждой зоны свои требования к классу износостойкости и влагостойкости, мы это учитываем при рекомендациях.</p></div>
+      </div>
+      <div class="value-item">
+        <div class="value-num">04</div>
+        <div><h3>Прозрачные сроки</h3><p>Если позиции нет на складе — говорим об этом сразу, а не после оплаты.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="team-cta">
+    <h2>Не уверены, какое покрытие подойдёт?</h2>
+    <p>Опишите помещение и задачу — подскажем коллекцию, класс износостойкости и посчитаем количество упаковок бесплатно.</p>
+    <a href="terra_floor_contacts_concept.html" class="btn btn-primary">Получить консультацию</a>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-bottom">
+      <span>© 2026 Terra Floor. Все права защищены.</span>
+      <span>О компании</span>
+    </div>
+  </div>
+</footer>
+
+<script src="cart.js"></script>
+</body>
+</html>
