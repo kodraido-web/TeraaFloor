@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Корзина и оформление заказа — Terra Floor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&family=Work+Sans:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1B1108; --walnut:#4A2E18; --clay:#C1652E; --clay-dark:#9C4D20;
+    --gold:#B98B3E; --linen:#F3ECDF; --linen-dark:#E8DDC8; --bark:#2B2118; --bark-soft:#5A4B3D;
+    --radius:14px; --max:1180px;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--linen);color:var(--bark);font-family:'Work Sans', sans-serif;font-size:16px;line-height:1.6;}
+  h1,h2,h3{font-family:'Fraunces', serif;font-weight:600;margin:0;color:var(--ink);}
+  .num{font-family:'Space Grotesk', sans-serif;font-weight:600;}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 32px;}
+  a{color:inherit;text-decoration:none;}
+
+  .site-header{position:sticky;top:0;z-index:50;background:rgba(243,236,223,0.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--linen-dark);}
+  .site-header .wrap{display:flex;align-items:center;justify-content:space-between;height:76px;}
+  .logo{display:flex;align-items:center;gap:10px;}
+  .logo-mark{width:34px;height:34px;}
+  .logo-text{font-family:'Fraunces', serif;font-weight:600;font-size:20px;color:var(--ink);}
+  .logo-text span{display:block;font-family:'Work Sans',sans-serif;font-weight:500;font-size:10px;letter-spacing:3px;color:var(--clay-dark);}
+  .phone{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:15px;}
+  .phone small{display:block;font-family:'Work Sans',sans-serif;font-weight:400;font-size:11px;color:var(--bark-soft);}
+
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 24px;border-radius:999px;font-size:14px;font-weight:600;cursor:pointer;border:1.5px solid transparent;transition:transform .2s, background .2s, border-color .2s;font-family:'Work Sans',sans-serif;}
+  .btn-primary{background:var(--clay);color:var(--linen);}
+  .btn-primary:hover{background:var(--clay-dark);transform:translateY(-2px);}
+  .btn-primary:disabled{opacity:.5;cursor:not-allowed;transform:none;}
+  .btn-ghost-dark{border-color:var(--bark-soft);color:var(--ink);}
+  .btn-block{width:100%;}
+
+  .breadcrumb{padding:20px 0 0;font-size:13px;color:var(--bark-soft);}
+  .breadcrumb span{margin:0 6px;opacity:.5;}
+
+  /* stepper */
+  .stepper{display:flex;gap:0;padding:22px 0 0;}
+  .step{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--bark-soft);}
+  .step .dot{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--linen-dark);display:flex;align-items:center;justify-content:center;font-size:12px;font-family:'Space Grotesk',sans-serif;}
+  .step.active{color:var(--ink);font-weight:600;}
+  .step.active .dot{background:var(--clay);border-color:var(--clay);color:var(--linen);}
+  .step.done .dot{background:var(--ink);border-color:var(--ink);color:var(--linen);}
+  .step-line{width:46px;height:1px;background:var(--linen-dark);margin:0 12px;align-self:center;}
+
+  .checkout-section{padding:32px 0 96px;}
+  .checkout-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:48px;align-items:start;}
+
+  .panel{background:#fff;border:1px solid var(--linen-dark);border-radius:var(--radius);padding:28px;margin-bottom:24px;}
+  .panel h2{font-size:19px;margin-bottom:18px;}
+
+  /* cart rows */
+  .cart-row{display:flex;align-items:center;gap:16px;padding:16px 0;border-bottom:1px solid var(--linen-dark);}
+  .cart-row:last-child{border-bottom:none;}
+  .row-thumb{width:58px;height:58px;border-radius:10px;flex-shrink:0;}
+  .row-info{flex:1;min-width:0;}
+  .row-collection{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--clay-dark);}
+  .row-name{font-size:15px;font-weight:500;color:var(--ink);margin:3px 0;}
+  .row-unit{font-size:12.5px;color:var(--bark-soft);}
+  .row-qty{display:flex;align-items:center;gap:10px;flex-shrink:0;}
+  .qty-btn{width:28px;height:28px;border-radius:50%;border:1px solid var(--linen-dark);background:var(--linen);font-size:15px;cursor:pointer;color:var(--ink);}
+  .qty-val{font-family:'Space Grotesk',sans-serif;font-weight:600;min-width:18px;text-align:center;}
+  .row-total{width:90px;text-align:right;flex-shrink:0;font-size:15px;}
+  .row-remove{background:none;border:none;color:var(--bark-soft);font-size:15px;cursor:pointer;flex-shrink:0;}
+  .row-remove:hover{color:var(--clay-dark);}
+
+  /* form fields */
+  .field-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .field{margin-bottom:16px;}
+  .field.full{grid-column:1/-1;}
+  .field label{display:block;font-size:12.5px;color:var(--bark-soft);margin-bottom:7px;}
+  .field input, .field textarea{
+    width:100%;background:var(--linen);border:1px solid var(--linen-dark);border-radius:10px;
+    padding:11px 13px;font-family:'Work Sans',sans-serif;font-size:14.5px;color:var(--ink);
+  }
+  .field textarea{resize:vertical;min-height:70px;}
+
+  /* radio cards */
+  .radio-cards{display:flex;flex-direction:column;gap:10px;}
+  .radio-cards input{display:none;}
+  .radio-cards label{
+    display:flex;justify-content:space-between;align-items:center;gap:12px;
+    border:1.5px solid var(--linen-dark);border-radius:10px;padding:14px 16px;cursor:pointer;font-size:14px;
+  }
+  .radio-cards label .opt-title{font-weight:500;color:var(--ink);}
+  .radio-cards label .opt-sub{font-size:12.5px;color:var(--bark-soft);display:block;margin-top:2px;}
+  .radio-cards label .opt-price{font-family:'Space Grotesk',sans-serif;font-weight:600;color:var(--ink);}
+  .radio-cards input:checked + label{border-color:var(--clay);background:rgba(193,101,46,0.05);}
+
+  /* summary */
+  .summary-card{position:sticky;top:96px;background:var(--ink);color:var(--linen);border-radius:var(--radius);padding:28px;}
+  .summary-card h2{color:var(--linen);font-size:19px;margin-bottom:18px;}
+  .summary-line{display:flex;justify-content:space-between;font-size:14px;color:#CBBCA1;margin-bottom:12px;}
+  .summary-line.discount{color:#8FBE9A;}
+  .summary-total{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid rgba(243,236,223,0.18);margin-top:8px;padding-top:16px;}
+  .summary-total .label{font-size:14px;color:#CBBCA1;}
+  .summary-total .num{font-size:26px;color:var(--gold);}
+  .promo-row{display:flex;gap:8px;margin:18px 0;}
+  .promo-row input{flex:1;background:rgba(243,236,223,0.07);border:1px solid rgba(243,236,223,0.22);border-radius:10px;padding:10px 12px;color:var(--linen);font-size:13.5px;}
+  .promo-row .btn{padding:10px 16px;font-size:13px;}
+  .summary-trust{display:flex;flex-direction:column;gap:8px;margin-top:18px;font-size:12.5px;color:#CBBCA1;}
+  .summary-trust span{color:var(--gold);margin-right:6px;}
+
+  footer{background:var(--ink);color:#B7A88E;padding:48px 0 28px;}
+  .footer-bottom{display:flex;justify-content:space-between;font-size:12.5px;color:#7C7058;}
+
+  @media (max-width:900px){
+    .checkout-grid{grid-template-columns:1fr;}
+    .field-grid{grid-template-columns:1fr;}
+    .summary-card{position:static;}
+    .wrap{padding:0 20px;}
+    .stepper{flex-wrap:wrap;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="logo">
+      <svg class="logo-mark" viewBox="0 0 100 100">
+        <g transform="translate(50,50)">
+          <rect x="-6" y="-44" width="12" height="28" rx="2" fill="#C1652E" transform="rotate(0)"/>
+          <rect x="-6" y="-44" width="12" height="28" rx="2" fill="#B98B3E" transform="rotate(45)"/>
+          <rect x="-6" y="-44" width="12" height="28" rx="2" fill="#C1652E" transform="rotate(90)"/>
+          <rect x="-6" y="-44" width="12" height="28" rx="2" fill="#B98B3E" transform="rotate(135)"/>
+          <rect x="-6" y="-44" width="12" height="28" rx="2" fill="#C1652E" transform="rotate(180)"/>
+          <rect x="-6" y="-44" width="12" height="28" rx="2" fill="#B98B3E" transform="rotate(225)"/>
+          <rect x="-6" y="-44" width="12" height="28" rx="2" fill="#C1652E" transform="rotate(270)"/>
+          <rect x="-6" y="-44" width="12" height="28" rx="2" fill="#B98B3E" transform="rotate(315)"/>
+          <circle r="13" fill="#F3ECDF"/>
+        </g>
+      </svg>
+      <div class="logo-text">Terra Floor<span>Дизайнерские полы</span></div>
+    </div>
+    <div class="phone">8 800 555-01-23<small>ежедневно, 9:00–21:00</small></div>
+  </div>
+</header>
+
+<div class="wrap breadcrumb"><a href="index.html">Главная</a><span>/</span>Корзина</div>
+
+<div class="wrap stepper">
+  <div class="step done"><span class="dot">✓</span>Корзина</div>
+  <span class="step-line"></span>
+  <div class="step active"><span class="dot">2</span>Доставка и оплата</div>
+  <span class="step-line"></span>
+  <div class="step"><span class="dot">3</span>Подтверждение</div>
+</div>
+
+<section class="checkout-section">
+  <div class="wrap checkout-grid">
+
+    <div>
+      <!-- CART ITEMS -->
+      <div class="panel">
+        <h2>Ваш заказ</h2>
+
+        <div class="cart-row" data-price="3678">
+          <div class="row-thumb" style="background:linear-gradient(135deg,#C1652E,#B98B3E);"></div>
+          <div class="row-info">
+            <div class="row-collection">Design Collection</div>
+            <div class="row-name">1208, Эбби</div>
+            <div class="row-unit">3 678 ₽ / упаковка · 1,2 м²</div>
+          </div>
+          <div class="row-qty">
+            <button class="qty-btn" onclick="changeQty(this,-1)">−</button>
+            <span class="qty-val">5</span>
+            <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+          </div>
+          <div class="row-total num">18 390 ₽</div>
+          <button class="row-remove" onclick="removeRow(this)">✕</button>
+        </div>
+
+        <div class="cart-row" data-price="4661">
+          <div class="row-thumb" style="background:linear-gradient(135deg,#4A2E18,#9C4D20);"></div>
+          <div class="row-info">
+            <div class="row-collection">Village</div>
+            <div class="row-name">V 1222, Oak natural</div>
+            <div class="row-unit">4 661 ₽ / упаковка · 1,918 м²</div>
+          </div>
+          <div class="row-qty">
+            <button class="qty-btn" onclick="changeQty(this,-1)">−</button>
+            <span class="qty-val">3</span>
+            <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+          </div>
+          <div class="row-total num">13 983 ₽</div>
+          <button class="row-remove" onclick="removeRow(this)">✕</button>
+        </div>
+
+        <div class="cart-row" data-price="5452">
+          <div class="row-thumb" style="background:linear-gradient(135deg,#5B7A73,#B98B3E);"></div>
+          <div class="row-info">
+            <div class="row-collection">AQUA Herringbone</div>
+            <div class="row-name">AQ205, Дуб Эннеди</div>
+            <div class="row-unit">5 452 ₽ / упаковка · 1,88 м²</div>
+          </div>
+          <div class="row-qty">
+            <button class="qty-btn" onclick="changeQty(this,-1)">−</button>
+            <span class="qty-val">2</span>
+            <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+          </div>
+          <div class="row-total num">10 904 ₽</div>
+          <button class="row-remove" onclick="removeRow(this)">✕</button>
+        </div>
+      </div>
+
+      <!-- CONTACT -->
+      <div class="panel">
+        <h2>Контактные данные</h2>
+        <div class="field-grid">
+          <div class="field"><label>Имя и фамилия</label><input type="text" placeholder="Анна Смирнова"></div>
+          <div class="field"><label>Телефон</label><input type="tel" placeholder="+7 ___ ___-__-__"></div>
+          <div class="field full"><label>Email</label><input type="email" placeholder="anna@mail.ru"></div>
+        </div>
+      </div>
+
+      <!-- DELIVERY -->
+      <div class="panel">
+        <h2>Способ доставки</h2>
+        <div class="radio-cards">
+          <input type="radio" name="delivery" id="d1" data-fee="500" checked onchange="updateSummary()">
+          <label for="d1"><span><span class="opt-title">Курьером по Москве</span><span class="opt-sub">1–2 дня, доставка до подъезда</span></span><span class="opt-price">500 ₽</span></label>
+
+          <input type="radio" name="delivery" id="d2" data-fee="0" onchange="updateSummary()">
+          <label for="d2"><span><span class="opt-title">Самовывоз со склада</span><span class="opt-sub">Готово к выдаче на следующий день</span></span><span class="opt-price">Бесплатно</span></label>
+
+          <input type="radio" name="delivery" id="d3" data-fee="0" onchange="updateSummary()">
+          <label for="d3"><span><span class="opt-title">Транспортная компания</span><span class="opt-sub">Для других регионов, 2–7 дней</span></span><span class="opt-price">По тарифу ТК</span></label>
+        </div>
+
+        <div class="field-grid" style="margin-top:20px;">
+          <div class="field"><label>Город</label><input type="text" placeholder="Москва"></div>
+          <div class="field"><label>Адрес доставки</label><input type="text" placeholder="Улица, дом, квартира"></div>
+        </div>
+      </div>
+
+      <!-- PAYMENT -->
+      <div class="panel">
+        <h2>Способ оплаты</h2>
+        <div class="radio-cards">
+          <input type="radio" name="payment" id="p1" checked>
+          <label for="p1"><span><span class="opt-title">Картой онлайн</span><span class="opt-sub">Visa, Mastercard, МИР</span></span></label>
+          <input type="radio" name="payment" id="p2">
+          <label for="p2"><span><span class="opt-title">При получении</span><span class="opt-sub">Наличными или картой курьеру</span></span></label>
+          <input type="radio" name="payment" id="p3">
+          <label for="p3"><span><span class="opt-title">Безналичный расчёт</span><span class="opt-sub">Для юридических лиц, со счётом</span></span></label>
+        </div>
+        <div class="field full" style="margin-top:18px;">
+          <label>Комментарий к заказу</label>
+          <textarea placeholder="Например: позвонить за час до доставки"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUMMARY -->
+    <div>
+      <div class="summary-card">
+        <h2>Итого по заказу</h2>
+        <div class="summary-line"><span>Товары, 10 упак.</span><span class="num" id="subtotal-out">37 770 ₽</span></div>
+        <div class="summary-line"><span>Доставка</span><span class="num" id="delivery-out">500 ₽</span></div>
+        <div class="summary-line discount" id="discount-row" style="display:none;"><span>Промокод TERRA10</span><span class="num" id="discount-out">−0 ₽</span></div>
+
+        <div class="promo-row">
+          <input type="text" id="promo-input" placeholder="Промокод">
+          <button class="btn btn-ghost-dark" style="border-color:rgba(243,236,223,0.4);color:var(--linen);" onclick="applyPromo()">Применить</button>
+        </div>
+
+        <div class="summary-total">
+          <span class="label">К оплате</span>
+          <span class="num" id="total-out">38 270 ₽</span>
+        </div>
+
+        <a href="#" class="btn btn-primary btn-block" style="margin-top:22px;">Оформить заказ</a>
+
+        <div class="summary-trust">
+          <div><span>✓</span>Безопасная оплата через защищённое соединение</div>
+          <div><span>✓</span>Бесплатная корректировка заказа до отправки</div>
+          <div><span>✓</span>Гарантия 25 лет на покрытие</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-bottom">
+      <span>© 2026 Terra Floor. Все права защищены.</span>
+      <span>Дизайн-концепт · корзина и оформление заказа</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  let promoActive = false;
+
+  function changeQty(btn, delta){
+    const row = btn.closest('.cart-row');
+    const valEl = row.querySelector('.qty-val');
+    let qty = parseInt(valEl.textContent) + delta;
+    if(qty < 1) qty = 1;
+    valEl.textContent = qty;
+    const price = parseFloat(row.dataset.price);
+    row.querySelector('.row-total').textContent = Math.round(price*qty).toLocaleString('ru-RU') + ' ₽';
+    updateSummary();
+  }
+
+  function removeRow(btn){
+    const row = btn.closest('.cart-row');
+    row.style.display = 'none';
+    updateSummary();
+  }
+
+  function applyPromo(){
+    const code = document.getElementById('promo-input').value.trim().toUpperCase();
+    promoActive = (code === 'TERRA10');
+    document.getElementById('discount-row').style.display = promoActive ? 'flex' : 'none';
+    updateSummary();
+  }
+
+  function updateSummary(){
+    const rows = document.querySelectorAll('.cart-row');
+    let subtotal = 0, packCount = 0;
+    rows.forEach(row=>{
+      if(row.style.display === 'none') return;
+      const price = parseFloat(row.dataset.price);
+      const qty = parseInt(row.querySelector('.qty-val').textContent);
+      subtotal += price*qty;
+      packCount += qty;
+    });
+
+    const deliveryFee = parseFloat(document.querySelector('input[name="delivery"]:checked').dataset.fee) || 0;
+    const discount = promoActive ? Math.round(subtotal*0.10) : 0;
+    const total = subtotal + deliveryFee - discount;
+
+    document.getElementById('subtotal-out').previousElementSibling
+      ? null : null;
+    document.querySelector('.summary-line span:first-child').textContent = 'Товары, ' + packCount + ' упак.';
+    document.getElementById('subtotal-out').textContent = subtotal.toLocaleString('ru-RU') + ' ₽';
+    document.getElementById('delivery-out').textContent = deliveryFee > 0 ? deliveryFee.toLocaleString('ru-RU') + ' ₽' : 'Бесплатно';
+    document.getElementById('discount-out').textContent = '−' + discount.toLocaleString('ru-RU') + ' ₽';
+    document.getElementById('total-out').textContent = total.toLocaleString('ru-RU') + ' ₽';
+  }
+
+  updateSummary();
+</script>
+
+</body>
+</html>
