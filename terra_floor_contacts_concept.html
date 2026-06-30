@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Контакты — Terra Floor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&family=Work+Sans:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1B1108; --walnut:#4A2E18; --clay:#C1652E; --clay-dark:#9C4D20;
+    --gold:#B98B3E; --linen:#F3ECDF; --linen-dark:#E8DDC8; --bark:#2B2118; --bark-soft:#5A4B3D;
+    --radius:14px; --max:1180px;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--linen);color:var(--bark);font-family:'Work Sans', sans-serif;font-size:16px;line-height:1.6;}
+  h1,h2,h3{font-family:'Fraunces', serif;font-weight:600;margin:0;color:var(--ink);}
+  .num{font-family:'Space Grotesk', sans-serif;font-weight:600;}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 32px;}
+  a{color:inherit;text-decoration:none;}
+
+  .site-header{position:sticky;top:0;z-index:50;background:rgba(243,236,223,0.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--linen-dark);}
+  .site-header .wrap{display:flex;align-items:center;justify-content:space-between;height:76px;}
+  .logo{display:flex;align-items:center;gap:10px;}
+  .logo-mark{width:34px;height:34px;}
+  .logo-text{font-family:'Fraunces', serif;font-weight:600;font-size:20px;color:var(--ink);}
+  .logo-text span{display:block;font-family:'Work Sans',sans-serif;font-weight:500;font-size:10px;letter-spacing:3px;color:var(--clay-dark);}
+  nav{display:flex;gap:28px;}
+  nav a{font-size:14px;font-weight:500;color:var(--bark-soft);}
+  nav a.active{color:var(--clay-dark);}
+  .phone{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:15px;}
+  .phone small{display:block;font-family:'Work Sans',sans-serif;font-weight:400;font-size:11px;color:var(--bark-soft);}
+
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 24px;border-radius:999px;font-size:14px;font-weight:600;cursor:pointer;border:1.5px solid transparent;transition:transform .2s, background .2s, border-color .2s;font-family:'Work Sans',sans-serif;}
+  .btn-primary{background:var(--clay);color:var(--linen);}
+  .btn-primary:hover{background:var(--clay-dark);transform:translateY(-2px);}
+  .btn-ghost-dark{border-color:var(--bark-soft);color:var(--ink);}
+  .btn-ghost-light{border-color:rgba(243,236,223,0.6);color:var(--linen);}
+  .btn-block{width:100%;}
+
+  .breadcrumb{padding:20px 0 0;font-size:13px;color:var(--bark-soft);}
+  .breadcrumb span{margin:0 6px;opacity:.5;}
+
+  .page-head{padding:14px 0 36px;}
+  .page-head h1{font-size:clamp(30px,4vw,42px);}
+  .page-head p{color:var(--bark-soft);margin-top:10px;max-width:520px;}
+
+  /* map */
+  .map-wrap{position:relative;border-radius:20px;overflow:hidden;height:420px;border:1px solid var(--linen-dark);}
+  .map-card{
+    position:absolute;top:24px;left:24px;background:#fff;border-radius:var(--radius);
+    padding:20px 24px;max-width:280px;box-shadow:0 20px 40px -24px rgba(43,33,24,0.4);
+  }
+  .map-card .eyebrow{font-size:11px;letter-spacing:2px;color:var(--clay-dark);text-transform:uppercase;}
+  .map-card h3{font-size:17px;margin:8px 0 6px;}
+  .map-card p{font-size:13px;color:var(--bark-soft);margin:0 0 14px;}
+  .map-card a{font-size:13px;font-weight:600;color:var(--ink);}
+  .pin{position:absolute;left:50%;top:48%;transform:translate(-50%,-100%);}
+
+  /* info cards row */
+  .info-row{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin:32px 0 0;}
+  .info-card{background:#fff;border:1px solid var(--linen-dark);border-radius:var(--radius);padding:24px;}
+  .info-card .eyebrow{font-size:11px;letter-spacing:2px;color:var(--clay-dark);text-transform:uppercase;}
+  .info-card .value{font-size:18px;color:var(--ink);margin:8px 0 4px;font-family:'Space Grotesk',sans-serif;font-weight:600;}
+  .info-card .sub{font-size:13px;color:var(--bark-soft);}
+
+  /* two column section */
+  .contacts-section{padding:64px 0 96px;}
+  .contacts-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:48px;align-items:start;}
+
+  .addr-block{margin-bottom:28px;}
+  .addr-block h3{font-size:18px;margin-bottom:10px;}
+  .addr-block p{font-size:14.5px;color:var(--bark-soft);margin:0 0 4px;}
+  .hours-table{margin-top:14px;font-size:14px;}
+  .hours-table div{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--linen-dark);max-width:280px;}
+  .social-row{display:flex;gap:12px;margin-top:20px;}
+  .social-row a{width:38px;height:38px;border-radius:50%;border:1px solid var(--linen-dark);display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--bark-soft);}
+
+  /* form panel with css-only tabs */
+  .form-panel{background:#fff;border:1px solid var(--linen-dark);border-radius:var(--radius);padding:32px;}
+  .form-panel input[type=radio]{display:none;}
+  .form-tabs{display:flex;gap:8px;border-bottom:1px solid var(--linen-dark);margin-bottom:24px;}
+  .form-tabs label{padding:10px 4px;margin-right:18px;font-size:14.5px;font-weight:500;color:var(--bark-soft);cursor:pointer;border-bottom:2px solid transparent;}
+  #ftab1:checked ~ .form-tabs label[for="ftab1"],
+  #ftab2:checked ~ .form-tabs label[for="ftab2"]{color:var(--ink);border-bottom-color:var(--clay);}
+  .form-panels .fpanel{display:none;}
+  #ftab1:checked ~ .form-panels #fpanel1,
+  #ftab2:checked ~ .form-panels #fpanel2{display:block;}
+
+  .field{margin-bottom:18px;}
+  .field-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .field label{display:block;font-size:12.5px;color:var(--bark-soft);margin-bottom:7px;}
+  .field input, .field select, .field textarea{
+    width:100%;background:var(--linen);border:1px solid var(--linen-dark);border-radius:10px;
+    padding:11px 13px;font-family:'Work Sans',sans-serif;font-size:14.5px;color:var(--ink);
+  }
+  .field textarea{resize:vertical;min-height:110px;}
+  .consent{font-size:12px;color:var(--bark-soft);margin:14px 0 18px;}
+  .consent a{text-decoration:underline;}
+
+  footer{background:var(--ink);color:#B7A88E;padding:48px 0 28px;margin-top:0;}
+  .footer-bottom{display:flex;justify-content:space-between;font-size:12.5px;color:#7C7058;}
+
+  @media (max-width:900px){
+    nav{display:none;}
+    .info-row{grid-template-columns:1fr;}
+    .contacts-grid{grid-template-columns:1fr;}
+    .field-grid{grid-template-columns:1fr;}
+    .map-wrap{height:320px;}
+    .wrap{padding:0 20px;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="logo">
+      <svg class="logo-mark" viewBox="0 0 100 100">
+        <g transform="translate(50,50)">
+          <rect x="-6" y="-44" width="12" height="28" rx="2" fill="#C1652E" transform="rotate(0)"/>
+          <rect x="-6" y="-44" width="12" height="28" rx="2" fill="#B98B3E" transform="rotate(45)"/>
+          <rect x="-6" y="-44" width="12" height="28" rx="2" fill="#C1652E" transform="rotate(90)"/>
+          <rect x="-6" y="-44" width="12" height="28" rx="2" fill="#B98B3E" transform="rotate(135)"/>
+          <rect x="-6" y="-44" width="12" height="28" rx="2" fill="#C1652E" transform="rotate(180)"/>
+          <rect x="-6" y="-44" width="12" height="28" rx="2" fill="#B98B3E" transform="rotate(225)"/>
+          <rect x="-6" y="-44" width="12" height="28" rx="2" fill="#C1652E" transform="rotate(270)"/>
+          <rect x="-6" y="-44" width="12" height="28" rx="2" fill="#B98B3E" transform="rotate(315)"/>
+          <circle r="13" fill="#F3ECDF"/>
+        </g>
+      </svg>
+      <div class="logo-text">Terra Floor<span>Дизайнерские полы</span></div>
+    </div>
+    <nav>
+      <a href="terra_floor_catalog_concept.html">Ламинат</a>
+      <a href="terra_floor_engineered_board_concept.html">Инженерная доска</a>
+      <a href="terra_floor_accessories_concept.html">Аксессуары</a>
+      <a href="terra_floor_contacts_concept.html" class="active">Контакты</a>
+    </nav>
+    <div class="phone">8 800 555-01-23<small>ежедневно, 9:00–21:00</small></div>
+  </div>
+</header>
+
+<div class="wrap breadcrumb"><a href="index.html">Главная</a><span>/</span>Контакты</div>
+
+<div class="wrap page-head">
+  <h1>Контакты</h1>
+  <p>Заглянуть в шоурум, позвонить или написать — выбирайте, как удобнее. Отвечаем быстро, без автоответчиков.</p>
+</div>
+
+<div class="wrap">
+  <div class="map-wrap">
+    <svg viewBox="0 0 1200 420" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%;">
+      <rect width="1200" height="420" fill="#EFE6D3"/>
+      <g stroke="#DCCBA8" stroke-width="2">
+        <line x1="0" y1="80" x2="1200" y2="80"/>
+        <line x1="0" y1="180" x2="1200" y2="160"/>
+        <line x1="0" y1="300" x2="1200" y2="290"/>
+        <line x1="180" y1="0" x2="160" y2="420"/>
+        <line x1="430" y1="0" x2="430" y2="420"/>
+        <line x1="700" y1="0" x2="720" y2="420"/>
+        <line x1="960" y1="0" x2="980" y2="420"/>
+      </g>
+      <g stroke="#C9B690" stroke-width="6" stroke-linecap="round" opacity="0.6">
+        <line x1="0" y1="230" x2="1200" y2="215"/>
+      </g>
+    </svg>
+    <div class="pin">
+      <svg width="46" height="58" viewBox="0 0 46 58">
+        <path d="M23 0C10 0 0 10 0 23c0 16 23 35 23 35s23-19 23-35C46 10 36 0 23 0z" fill="#C1652E"/>
+        <circle cx="23" cy="22" r="9" fill="#F3ECDF"/>
+      </svg>
+    </div>
+    <div class="map-card">
+      <span class="eyebrow">Шоурум</span>
+      <h3>Terra Floor на Малой Грузинской</h3>
+      <p>ул. Малая Грузинская, 14, Москва<br>Пн–Сб: 10:00–20:00</p>
+      <a href="#">Построить маршрут →</a>
+    </div>
+  </div>
+
+  <div class="info-row">
+    <div class="info-card">
+      <span class="eyebrow">Телефон</span>
+      <div class="value num">8 800 555-01-23</div>
+      <div class="sub">Бесплатно по России, ежедневно 9:00–21:00</div>
+    </div>
+    <div class="info-card">
+      <span class="eyebrow">Email</span>
+      <div class="value">hello@terrafloor.ru</div>
+      <div class="sub">Отвечаем в течение рабочего дня</div>
+    </div>
+    <div class="info-card">
+      <span class="eyebrow">Адрес шоурума</span>
+      <div class="value" style="font-size:15px;">М. Грузинская, 14</div>
+      <div class="sub">5 минут от м. Краснопресненская</div>
+    </div>
+  </div>
+</div>
+
+<section class="contacts-section">
+  <div class="wrap contacts-grid">
+
+    <div>
+      <div class="addr-block">
+        <h3>Шоурум</h3>
+        <p>ул. Малая Грузинская, 14, Москва</p>
+        <p>5 минут пешком от м. Краснопресненская</p>
+        <div class="hours-table">
+          <div><span>Пн–Сб</span><span class="num">10:00–20:00</span></div>
+          <div><span>Вс</span><span class="num">11:00–18:00</span></div>
+        </div>
+      </div>
+
+      <div class="addr-block">
+        <h3>Для дилеров и партнёров</h3>
+        <p>Оптовые условия и сотрудничество — отдельная линия.</p>
+        <p>dealers@terrafloor.ru · 8 800 555-01-24</p>
+      </div>
+
+      <div class="social-row">
+        <a href="#">VK</a>
+        <a href="#">TG</a>
+        <a href="#">WA</a>
+      </div>
+    </div>
+
+    <div class="form-panel">
+      <input type="radio" name="ftabs" id="ftab1" checked>
+      <input type="radio" name="ftabs" id="ftab2">
+      <div class="form-tabs">
+        <label for="ftab1">Написать нам</label>
+        <label for="ftab2">Заказать звонок</label>
+      </div>
+
+      <div class="form-panels">
+        <div class="fpanel" id="fpanel1">
+          <div class="field-grid">
+            <div class="field"><label>Имя</label><input type="text" placeholder="Анна"></div>
+            <div class="field"><label>Телефон или email</label><input type="text" placeholder="+7 ___ ___-__-__"></div>
+          </div>
+          <div class="field">
+            <label>Тема обращения</label>
+            <select>
+              <option>Вопрос по товару</option>
+              <option>Расчёт стоимости укладки</option>
+              <option>Статус заказа</option>
+              <option>Сотрудничество / опт</option>
+              <option>Другое</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Сообщение</label>
+            <textarea placeholder="Расскажите, что вас интересует"></textarea>
+          </div>
+          <p class="consent">Отправляя форму, вы соглашаетесь с <a href="#">политикой обработки персональных данных</a>.</p>
+          <a href="#" class="btn btn-primary btn-block">Отправить сообщение</a>
+        </div>
+
+        <div class="fpanel" id="fpanel2">
+          <div class="field"><label>Имя</label><input type="text" placeholder="Анна"></div>
+          <div class="field"><label>Телефон</label><input type="tel" placeholder="+7 ___ ___-__-__"></div>
+          <div class="field">
+            <label>Удобное время для звонка</label>
+            <select>
+              <option>Как можно скорее</option>
+              <option>Утром (9:00–12:00)</option>
+              <option>Днём (12:00–17:00)</option>
+              <option>Вечером (17:00–21:00)</option>
+            </select>
+          </div>
+          <p class="consent">Перезвоним в течение 15 минут в рабочее время.</p>
+          <a href="#" class="btn btn-primary btn-block">Жду звонка</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-bottom">
+      <span>© 2026 Terra Floor. Все права защищены.</span>
+      <span>Дизайн-концепт · страница контактов</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
