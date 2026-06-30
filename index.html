@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terra Floor — премиальные дизайнерские полы</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&family=Work+Sans:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1B1108;
+    --walnut:#4A2E18;
+    --clay:#C1652E;
+    --clay-dark:#9C4D20;
+    --gold:#B98B3E;
+    --linen:#F3ECDF;
+    --linen-dark:#E8DDC8;
+    --bark:#2B2118;
+    --bark-soft:#5A4B3D;
+    --radius:14px;
+    --max:1180px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--linen);
+    color:var(--bark);
+    font-family:'Work Sans', sans-serif;
+    font-size:16px;
+    line-height:1.6;
+  }
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    margin:0;
+    color:var(--ink);
+  }
+  .num{font-family:'Space Grotesk', sans-serif;font-weight:600;}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 32px;}
+  a{color:inherit;text-decoration:none;}
+  img,svg{display:block;max-width:100%;}
+
+  /* ---------- HEADER ---------- */
+  .site-header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(243,236,223,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--linen-dark);
+  }
+  .site-header .wrap{
+    display:flex;align-items:center;justify-content:space-between;
+    height:76px;
+  }
+  .logo{display:flex;align-items:center;gap:10px;}
+  .logo-mark{width:34px;height:34px;}
+  .logo-text{font-family:'Fraunces', serif;font-weight:600;font-size:20px;letter-spacing:0.5px;color:var(--ink);}
+  .logo-text span{display:block;font-family:'Work Sans',sans-serif;font-weight:500;font-size:10px;letter-spacing:3px;color:var(--clay-dark);}
+  nav{display:flex;gap:28px;}
+  nav a{font-size:14px;font-weight:500;color:var(--bark-soft);transition:color .2s;}
+  nav a.active{color:var(--clay-dark);}
+  nav a:hover{color:var(--clay-dark);}
+  .header-cta{display:flex;align-items:center;gap:18px;}
+  .phone{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:15px;}
+  .phone small{display:block;font-family:'Work Sans',sans-serif;font-weight:400;font-size:11px;color:var(--bark-soft);}
+
+  /* ---------- BUTTONS ---------- */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    padding:13px 26px;border-radius:999px;font-size:14px;font-weight:600;
+    cursor:pointer;border:1.5px solid transparent;transition:transform .2s, background .2s, border-color .2s;
+    font-family:'Work Sans',sans-serif;
+  }
+  .btn-primary{background:var(--clay);color:var(--linen);}
+  .btn-primary:hover{background:var(--clay-dark);transform:translateY(-2px);}
+  .btn-ghost{border-color:rgba(243,236,223,0.55);color:var(--linen);}
+  .btn-ghost:hover{border-color:var(--linen);transform:translateY(-2px);}
+  .btn-ghost-dark{border-color:var(--bark-soft);color:var(--ink);}
+  .btn-ghost-dark:hover{border-color:var(--ink);transform:translateY(-2px);}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    background:var(--ink);
+    color:var(--linen);
+    overflow:hidden;
+    padding:120px 0 100px;
+  }
+  .hero-pattern{position:absolute;inset:0;width:100%;height:100%;}
+  .hero .wrap{position:relative;z-index:2;}
+  .eyebrow{
+    display:inline-block;font-size:12px;letter-spacing:3px;font-weight:600;
+    color:var(--gold);text-transform:uppercase;margin-bottom:18px;
+  }
+  .hero h1{
+    font-size:clamp(38px,5.4vw,64px);
+    line-height:1.08;
+    max-width:760px;
+    color:var(--linen);
+  }
+  .hero h1 em{font-style:normal;color:var(--gold);}
+  .hero p.lead{
+    max-width:520px;margin:24px 0 36px;font-size:18px;color:#D9CDB8;
+  }
+  .hero-actions{display:flex;gap:16px;flex-wrap:wrap;}
+
+  /* ---------- TRUST STRIP ---------- */
+  .trust-strip{background:var(--walnut);color:var(--linen);}
+  .trust-strip .wrap{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:24px;
+    padding:26px 32px;
+  }
+  .trust-item{display:flex;align-items:center;gap:12px;font-size:13.5px;color:#E6D9C4;}
+  .trust-item .num{color:var(--gold);font-size:18px;}
+
+  /* ---------- SECTION HEADINGS ---------- */
+  section{padding:96px 0;}
+  .section-head{max-width:600px;margin-bottom:56px;}
+  .section-head .eyebrow{color:var(--clay-dark);}
+  .section-head h2{font-size:clamp(28px,3.4vw,40px);line-height:1.15;}
+  .section-head p{color:var(--bark-soft);margin-top:14px;font-size:16px;}
+
+  /* ---------- COLLECTIONS ---------- */
+  .collections-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+  .collection-card{
+    background:#fff;border-radius:var(--radius);overflow:hidden;
+    border:1px solid var(--linen-dark);
+    transition:transform .25s, box-shadow .25s;
+  }
+  .collection-card:hover{transform:translateY(-6px);box-shadow:0 18px 40px -20px rgba(43,33,24,0.35);}
+  .plank-strip{height:14px;display:flex;}
+  .plank-strip span{flex:1;}
+  .plank-strip.easystep span:nth-child(odd){background:var(--clay);}
+  .plank-strip.easystep span:nth-child(even){background:var(--walnut);}
+  .plank-strip.design span:nth-child(odd){background:var(--clay);}
+  .plank-strip.design span:nth-child(even){background:var(--gold);}
+  .plank-strip.forest span:nth-child(odd){background:var(--walnut);}
+  .plank-strip.forest span:nth-child(even){background:var(--ink);}
+  .plank-strip.village span:nth-child(odd){background:var(--walnut);}
+  .plank-strip.village span:nth-child(even){background:var(--bark-soft);}
+  .plank-strip.aqua span:nth-child(odd){background:#5B7A73;}
+  .plank-strip.aqua span:nth-child(even){background:#8FA89F;}
+  .plank-strip.aquaherring span:nth-child(odd){background:#5B7A73;}
+  .plank-strip.aquaherring span:nth-child(even){background:var(--gold);}
+  .collection-body{padding:28px 26px 30px;}
+  .collection-body .eyebrow{font-size:11px;color:var(--bark-soft);}
+  .collection-body h3{font-size:22px;margin:6px 0 12px;}
+  .collection-body p{font-size:14.5px;color:var(--bark-soft);margin:0 0 18px;}
+  .price-row{display:flex;align-items:baseline;justify-content:space-between;border-top:1px solid var(--linen-dark);padding-top:16px;}
+  .price-row .num{font-size:20px;color:var(--ink);}
+  .price-row .num small{font-family:'Work Sans',sans-serif;font-weight:500;font-size:12px;color:var(--bark-soft);}
+  .price-row a{font-size:13px;font-weight:600;color:var(--clay-dark);}
+
+  /* ---------- CALCULATOR (signature) ---------- */
+  .calc-section{background:var(--ink);color:var(--linen);}
+  .calc-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:start;}
+  .calc-section .section-head{color:var(--linen);}
+  .calc-section .section-head p{color:#CBBCA1;}
+  .calc-section .section-head .eyebrow{color:var(--gold);}
+  .calc-card{
+    background:rgba(243,236,223,0.04);
+    border:1px solid rgba(243,236,223,0.16);
+    border-radius:var(--radius);
+    padding:32px;
+  }
+  .field{margin-bottom:20px;}
+  .field label{display:block;font-size:13px;color:#CBBCA1;margin-bottom:8px;}
+  .field input[type=number], .field select{
+    width:100%;background:rgba(243,236,223,0.07);
+    border:1px solid rgba(243,236,223,0.22);
+    border-radius:10px;padding:12px 14px;color:var(--linen);
+    font-family:'Space Grotesk',sans-serif;font-size:15px;
+  }
+  .field select option{color:#111;}
+  .calc-result{
+    margin-top:8px;border-top:1px solid rgba(243,236,223,0.16);padding-top:22px;
+    display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
+  }
+  .calc-result .stat-label{font-size:12px;color:#CBBCA1;margin-bottom:6px;}
+  .calc-result .stat-value{font-size:22px;}
+  .calc-result .stat-value.total{color:var(--gold);}
+  .calc-note{font-size:12.5px;color:#9C8E78;margin-top:18px;}
+
+  /* ---------- FEATURES ---------- */
+  .features-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;}
+  .feature{border-top:2px solid var(--clay);padding-top:18px;}
+  .feature h3{font-size:17px;margin-bottom:8px;}
+  .feature p{font-size:14px;color:var(--bark-soft);margin:0;}
+
+  /* ---------- CTA BANNER ---------- */
+  .cta-banner{
+    background:linear-gradient(120deg, var(--clay) 0%, var(--clay-dark) 100%);
+    border-radius:24px;color:var(--linen);
+    padding:56px 56px;
+    display:flex;align-items:center;justify-content:space-between;gap:32px;
+    margin:0 32px;
+  }
+  .cta-banner h2{color:var(--linen);font-size:clamp(24px,3vw,32px);max-width:480px;}
+  .cta-banner .btn-ghost{border-color:rgba(243,236,223,0.6);}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--ink);color:#B7A88E;padding:64px 0 32px;}
+  .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:36px;margin-bottom:48px;}
+  .footer-grid h4{color:var(--linen);font-family:'Work Sans',sans-serif;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:16px;}
+  .footer-grid ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;font-size:14px;}
+  .footer-grid p{font-size:14px;max-width:280px;color:#A3957C;}
+  .footer-bottom{
+    border-top:1px solid rgba(183,168,142,0.18);padding-top:24px;
+    display:flex;justify-content:space-between;font-size:12.5px;color:#7C7058;
+  }
+
+  @media (max-width:900px){
+    nav{display:none;}
+    .collections-grid{grid-template-columns:1fr;}
+    .calc-grid{grid-template-columns:1fr;}
+    .features-grid{grid-template-columns:repeat(2,1fr);}
+    .trust-strip .wrap{grid-template-columns:repeat(2,1fr);}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+    .cta-banner{flex-direction:column;align-items:flex-start;margin:0 16px;}
+    .wrap{padding:0 20px;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="logo">
+      <svg class="logo-mark" viewBox="0 0 100 100">
+        <g transform="translate(50,50)">
+          <rect x="-6" y="-44" width="12" height="28" rx="2" fill="#C1652E" transform="rotate(0)"/>
+          <rect x="-6" y="-44" width="12" height="28" rx="2" fill="#B98B3E" transform="rotate(45)"/>
+          <rect x="-6" y="-44" width="12" height="28" rx="2" fill="#C1652E" transform="rotate(90)"/>
+          <rect x="-6" y="-44" width="12" height="28" rx="2" fill="#B98B3E" transform="rotate(135)"/>
+          <rect x="-6" y="-44" width="12" height="28" rx="2" fill="#C1652E" transform="rotate(180)"/>
+          <rect x="-6" y="-44" width="12" height="28" rx="2" fill="#B98B3E" transform="rotate(225)"/>
+          <rect x="-6" y="-44" width="12" height="28" rx="2" fill="#C1652E" transform="rotate(270)"/>
+          <rect x="-6" y="-44" width="12" height="28" rx="2" fill="#B98B3E" transform="rotate(315)"/>
+          <circle r="13" fill="#F3ECDF"/>
+        </g>
+      </svg>
+      <div class="logo-text">Terra Floor<span>Дизайнерские полы</span></div>
+    </div>
+    <nav>
+      <a href="#collections">Ламинат</a>
+      <a href="terra_floor_engineered_board_concept.html">Инженерная доска</a>
+      <a href="terra_floor_accessories_concept.html">Аксессуары</a>
+      <a href="terra_floor_contacts_concept.html">Контакты</a>
+    </nav>
+    <div class="header-cta">
+      <div class="phone">8 800 555-01-23<small>ежедневно, 9:00–21:00</small></div>
+      <a href="#calculator" class="btn btn-ghost-dark">Подбор пола</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <svg class="hero-pattern" viewBox="0 0 1200 640" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+      <pattern id="plankA" width="130" height="46" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)">
+        <rect x="5" y="8" width="112" height="30" rx="3" fill="#C1652E"/>
+      </pattern>
+      <pattern id="plankB" width="130" height="46" patternUnits="userSpaceOnUse" patternTransform="rotate(28)" x="65">
+        <rect x="5" y="8" width="112" height="30" rx="3" fill="#B98B3E"/>
+      </pattern>
+      <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#1B1108" stop-opacity="0.25"/>
+        <stop offset="55%" stop-color="#1B1108" stop-opacity="0.55"/>
+        <stop offset="100%" stop-color="#1B1108" stop-opacity="0.96"/>
+      </linearGradient>
+    </defs>
+    <rect width="1200" height="640" fill="url(#plankA)" opacity="0.45"/>
+    <rect width="1200" height="640" fill="url(#plankB)" opacity="0.32"/>
+    <rect width="1200" height="640" fill="url(#fade)"/>
+  </svg>
+  <div class="wrap">
+    <span class="eyebrow">Авторские напольные покрытия</span>
+    <h1>Пол, который задаёт <em>характер</em> всему дому</h1>
+    <p class="lead">Дизайнерский ламинат и виниловые покрытия плотных, тёплых декоров — для тех, кто выбирает интерьер без компромиссов между красотой и практичностью.</p>
+    <div class="hero-actions">
+      <a href="#collections" class="btn btn-primary">Смотреть каталог</a>
+      <a href="#calculator" class="btn btn-ghost">Рассчитать стоимость пола →</a>
+    </div>
+  </div>
+</section>
+
+<div class="trust-strip">
+  <div class="wrap">
+    <div class="trust-item"><span class="num">25</span> лет гарантии на покрытие</div>
+    <div class="trust-item"><span class="num">0</span> формальдегидов в составе</div>
+    <div class="trust-item"><span class="num">34</span> класс износостойкости</div>
+    <div class="trust-item"><span class="num">1–3</span> дня бесплатный замер</div>
+  </div>
+</div>
+
+<section id="collections">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Ассортимент</span>
+      <h2>6 коллекций — на любой характер интерьера</h2>
+      <p>От практичной классики до авторских декоров и влагостойких решений для кухни и ванной.</p>
+    </div>
+    <div class="collections-grid">
+
+      <div class="collection-card">
+        <div class="plank-strip easystep"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+        <div class="collection-body">
+          <span class="eyebrow">EasyStep</span>
+          <h3>Практичная классика</h3>
+          <p>Лёгкий монтаж и сдержанные тона дерева — оптимальный вариант на каждый день, без переплаты за лишнее.</p>
+          <div class="price-row">
+            <div class="num">от 2 670 ₽<small> / м²</small></div>
+            <a href="#">Подробнее →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="collection-card">
+        <div class="plank-strip design"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+        <div class="collection-body">
+          <span class="eyebrow">Design Collection</span>
+          <h3>Авторские декоры</h3>
+          <p>Яркая, узнаваемая фактура с этническими и художественными мотивами — для смелых, самобытных интерьеров.</p>
+          <div class="price-row">
+            <div class="num">от 2 660 ₽<small> / м²</small></div>
+            <a href="#">Подробнее →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="collection-card">
+        <div class="plank-strip forest"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+        <div class="collection-body">
+          <span class="eyebrow">Forest</span>
+          <h3>Глубокие природные тона</h3>
+          <p>Насыщенные, почти благородные оттенки дерева — для интерьеров, где пол задаёт настроение всей комнате.</p>
+          <div class="price-row">
+            <div class="num">от 3 045 ₽<small> / м²</small></div>
+            <a href="#">Подробнее →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="collection-card">
+        <div class="plank-strip village"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+        <div class="collection-body">
+          <span class="eyebrow">Village</span>
+          <h3>Сдержанная классика</h3>
+          <p>Тёплые природные тона и спокойная текстура дерева — для интерьеров, где главный акцент на уюте, а не на эффектах.</p>
+          <div class="price-row">
+            <div class="num">от 2 430 ₽<small> / м²</small></div>
+            <a href="#">Подробнее →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="collection-card">
+        <div class="plank-strip aqua"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+        <div class="collection-body">
+          <span class="eyebrow">AQUA SPC</span>
+          <h3>Полная влагостойкость</h3>
+          <p>Виниловое покрытие без древесных волокон в составе — не боится воды и кухонных будней, классическая укладка.</p>
+          <div class="price-row">
+            <div class="num">от 2 790 ₽<small> / м²</small></div>
+            <a href="#">Подробнее →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="collection-card">
+        <div class="plank-strip aquaherring"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+        <div class="collection-body">
+          <span class="eyebrow">AQUA Herringbone</span>
+          <h3>Влагостойкость + ёлочка</h3>
+          <p>Та же влагостойкая основа SPC, но с укладкой «ёлочкой» — для тех, кто хочет европейский характер пола на кухне.</p>
+          <div class="price-row">
+            <div class="num">от 2 900 ₽<small> / м²</small></div>
+            <a href="#">Подробнее →</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="calc-section" id="calculator">
+  <div class="wrap">
+    <div class="calc-grid">
+      <div>
+        <div class="section-head">
+          <span class="eyebrow">Калькулятор</span>
+          <h2>Сколько будет стоить ваш пол</h2>
+          <p>Укажите площадь помещения и коллекцию — мы посчитаем нужное количество упаковок и итоговую сумму с учётом запаса на подрезку.</p>
+        </div>
+        <div class="features-grid" style="grid-template-columns:repeat(2,1fr);gap:20px;">
+          <div class="feature" style="border-color:var(--gold)">
+            <h3 style="color:var(--linen)">Точный расчёт</h3>
+            <p style="color:#CBBCA1">Без округлений «на глаз» — только реальные размеры упаковки.</p>
+          </div>
+          <div class="feature" style="border-color:var(--gold)">
+            <h3 style="color:var(--linen)">Запас на подрезку</h3>
+            <p style="color:#CBBCA1">Учитываем 5–15% — настраивается под форму помещения.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="calc-card">
+        <div class="field">
+          <label for="collection">Коллекция</label>
+          <select id="collection" oninput="calcFloor()">
+            <option value="easystep">EasyStep — 2 670 ₽/м²</option>
+            <option value="design" selected>Design Collection — 2 660 ₽/м²</option>
+            <option value="forest">Forest — 3 045 ₽/м²</option>
+            <option value="village">Village — 2 430 ₽/м²</option>
+            <option value="aquaspc">AQUA SPC — 2 790 ₽/м²</option>
+            <option value="aquaherring">AQUA Herringbone — 2 900 ₽/м²</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="area">Площадь помещения, м²</label>
+          <input type="number" id="area" value="24" min="0" step="0.5" oninput="calcFloor()">
+        </div>
+        <div class="field">
+          <label for="waste">Запас на подрезку, %</label>
+          <input type="number" id="waste" value="10" min="0" max="30" step="1" oninput="calcFloor()">
+        </div>
+
+        <div class="calc-result">
+          <div>
+            <div class="stat-label">Упаковок</div>
+            <div class="stat-value num" id="packs-out">21</div>
+          </div>
+          <div>
+            <div class="stat-label">Площадь с запасом</div>
+            <div class="stat-value num" id="area-out">25.2 м²</div>
+          </div>
+          <div>
+            <div class="stat-label">Итого</div>
+            <div class="stat-value num total" id="total-out">67 536 ₽</div>
+          </div>
+        </div>
+        <p class="calc-note">Расчёт по реальным ценам и упаковкам из прайс-листа BOHO (данные на 08.06.2026). Внутри коллекции цена может отличаться по конкретному декору — точная цена уточняется на странице товара.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="features">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Почему Terra Floor</span>
+      <h2>Премиальность — в деталях, а не в наценке</h2>
+    </div>
+    <div class="features-grid">
+      <div class="feature">
+        <h3>Акриловые смолы</h3>
+        <p>Связующий состав без формальдегидов — безопасно для дома и детских комнат.</p>
+      </div>
+      <div class="feature">
+        <h3>Синхронное тиснение</h3>
+        <p>Текстура повторяет рисунок древесного спила — на ощупь покрытие как натуральный паркет.</p>
+      </div>
+      <div class="feature">
+        <h3>Бесплатный замер</h3>
+        <p>Выезд специалиста для точного расчёта и подбора укладки на ваш объект.</p>
+      </div>
+      <div class="feature">
+        <h3>Монтаж под ключ</h3>
+        <p>Можем не только продать, но и уложить покрытие силами проверенной бригады.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0;">
+  <div class="cta-banner">
+    <h2>Не уверены, какая коллекция подойдёт вашему интерьеру?</h2>
+    <a href="#" class="btn btn-ghost">Бесплатная консультация дизайнера →</a>
+  </div>
+</section>
+
+<footer id="contacts">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h4>Terra Floor</h4>
+        <p>Премиальные дизайнерские напольные покрытия с доставкой по России. Подбор, расчёт и монтаж под ключ.</p>
+      </div>
+      <div>
+        <h4>Каталог</h4>
+        <ul>
+          <li><a href="#">Village</a></li>
+          <li><a href="#">Design Collection</a></li>
+          <li><a href="#">Aqua</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Компания</h4>
+        <ul>
+          <li><a href="#">О нас</a></li>
+          <li><a href="#">Доставка и оплата</a></li>
+          <li><a href="#">Дилерам</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Контакты</h4>
+        <ul>
+          <li>8 800 555-01-23</li>
+          <li>hello@terrafloor.ru</li>
+          <li>Москва, шоурум на карте</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Terra Floor. Все права защищены.</span>
+      <span>Дизайн-концепт · v1</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const collections = {
+    easystep:    { price: 2670, pack: 1.464 },
+    design:      { price: 2660, pack: 1.8954 },
+    forest:      { price: 3045, pack: 1.94 },
+    village:     { price: 2430, pack: 1.918 },
+    aquaspc:     { price: 2790, pack: 2.635 },
+    aquaherring: { price: 2900, pack: 1.88 }
+  };
+  function calcFloor(){
+    const area = parseFloat(document.getElementById('area').value) || 0;
+    const waste = parseFloat(document.getElementById('waste').value) || 0;
+    const key = document.getElementById('collection').value;
+    const c = collections[key];
+    const neededArea = area * (1 + waste/100);
+    const packs = c.pack > 0 ? Math.ceil(neededArea / c.pack) : 0;
+    const coveredArea = packs * c.pack;
+    const total = Math.round(coveredArea * c.price);
+    document.getElementById('packs-out').textContent = packs;
+    document.getElementById('area-out').textContent = coveredArea.toFixed(1) + ' м²';
+    document.getElementById('total-out').textContent = total.toLocaleString('ru-RU') + ' ₽';
+  }
+  calcFloor();
+</script>
+
+</body>
+</html>
