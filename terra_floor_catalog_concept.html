@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Каталог — Terra Floor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&family=Work+Sans:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1B1108; --walnut:#4A2E18; --clay:#C1652E; --clay-dark:#9C4D20;
+    --gold:#B98B3E; --linen:#F3ECDF; --linen-dark:#E8DDC8; --bark:#2B2118; --bark-soft:#5A4B3D;
+    --radius:14px; --max:1180px;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--linen);color:var(--bark);font-family:'Work Sans', sans-serif;font-size:16px;line-height:1.6;}
+  h1,h2,h3{font-family:'Fraunces', serif;font-weight:600;margin:0;color:var(--ink);}
+  .num{font-family:'Space Grotesk', sans-serif;font-weight:600;}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 32px;}
+  a{color:inherit;text-decoration:none;}
+
+  .site-header{position:sticky;top:0;z-index:50;background:rgba(243,236,223,0.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--linen-dark);}
+  .site-header .wrap{display:flex;align-items:center;justify-content:space-between;height:76px;}
+  .logo{display:flex;align-items:center;gap:10px;}
+  .logo-mark{width:34px;height:34px;}
+  .logo-text{font-family:'Fraunces', serif;font-weight:600;font-size:20px;color:var(--ink);}
+  .logo-text span{display:block;font-family:'Work Sans',sans-serif;font-weight:500;font-size:10px;letter-spacing:3px;color:var(--clay-dark);}
+  nav{display:flex;gap:28px;}
+  nav a{font-size:14px;font-weight:500;color:var(--bark-soft);}
+  nav a.active{color:var(--clay-dark);}
+  .phone{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:15px;}
+  .phone small{display:block;font-family:'Work Sans',sans-serif;font-weight:400;font-size:11px;color:var(--bark-soft);}
+
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 22px;border-radius:999px;font-size:13.5px;font-weight:600;cursor:pointer;border:1.5px solid transparent;transition:transform .2s, background .2s, border-color .2s;font-family:'Work Sans',sans-serif;}
+  .btn-primary{background:var(--clay);color:var(--linen);}
+  .btn-primary:hover{background:var(--clay-dark);}
+  .btn-ghost-dark{border-color:var(--bark-soft);color:var(--ink);}
+  .btn-ghost-dark:hover{border-color:var(--ink);}
+
+  .breadcrumb{padding:20px 0 0;font-size:13px;color:var(--bark-soft);}
+  .breadcrumb span{margin:0 6px;opacity:.5;}
+
+  .catalog-head{padding:18px 0 0;display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+  .catalog-head h1{font-size:clamp(28px,3.4vw,38px);}
+  .catalog-head .count{font-size:14px;color:var(--bark-soft);margin-top:6px;}
+  .head-controls{display:flex;align-items:center;gap:12px;}
+  select{background:#fff;border:1px solid var(--linen-dark);border-radius:10px;padding:10px 14px;font-family:'Work Sans',sans-serif;font-size:13.5px;color:var(--ink);}
+
+  #filters-toggle{display:none;}
+  .filters-toggle-btn{display:none;}
+
+  .catalog-section{padding:28px 0 96px;}
+  .catalog-layout{display:grid;grid-template-columns:240px 1fr;gap:40px;align-items:start;}
+
+  .filters{position:sticky;top:96px;}
+  .filter-group{border-bottom:1px solid var(--linen-dark);padding-bottom:18px;margin-bottom:18px;}
+  .filter-group:last-child{border-bottom:none;}
+  .filter-group h3{font-size:14px;font-weight:600;margin-bottom:12px;font-family:'Work Sans',sans-serif;}
+  .filter-option{display:flex;align-items:center;gap:9px;font-size:14px;color:var(--bark-soft);margin-bottom:9px;cursor:pointer;}
+  .filter-option input{accent-color:var(--clay);width:15px;height:15px;}
+  .filter-option .fcount{margin-left:auto;color:#A99A82;font-size:12.5px;}
+  .price-range{display:flex;gap:10px;}
+  .price-range input{width:100%;border:1px solid var(--linen-dark);border-radius:8px;padding:8px 10px;font-family:'Space Grotesk',sans-serif;font-size:13.5px;background:var(--linen);}
+  .filter-apply{display:flex;gap:10px;margin-top:6px;}
+  .filter-apply .btn{flex:1;padding:10px;}
+
+  .product-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  .cat-card{background:#fff;border:1px solid var(--linen-dark);border-radius:var(--radius);overflow:hidden;transition:transform .2s, box-shadow .2s;}
+  .cat-card:hover{transform:translateY(-4px);box-shadow:0 16px 32px -22px rgba(43,33,24,0.35);}
+  .cat-swatch{aspect-ratio:1/1;position:relative;}
+  .cat-tag{position:absolute;top:12px;left:12px;background:rgba(27,17,8,0.72);color:var(--linen);font-size:11px;letter-spacing:1px;padding:5px 10px;border-radius:999px;text-transform:uppercase;}
+  .cat-body{padding:16px 18px 18px;}
+  .cat-body .name{font-size:15px;font-weight:500;color:var(--ink);margin:0 0 8px;}
+  .cat-chips{display:flex;gap:6px;margin-bottom:12px;}
+  .cat-chips span{font-size:11px;color:var(--bark-soft);background:var(--linen);border-radius:6px;padding:3px 7px;}
+  .cat-price-row{display:flex;align-items:baseline;justify-content:space-between;border-top:1px solid var(--linen-dark);padding-top:12px;}
+  .cat-price-row .num{font-size:16.5px;color:var(--ink);}
+  .cat-price-row .num small{font-family:'Work Sans',sans-serif;font-weight:500;font-size:11.5px;color:var(--bark-soft);}
+  .cat-price-row a{font-size:12.5px;font-weight:600;color:var(--clay-dark);}
+
+  .pagination{display:flex;justify-content:center;gap:8px;margin-top:48px;}
+  .pagination a{width:38px;height:38px;display:flex;align-items:center;justify-content:center;border-radius:10px;border:1px solid var(--linen-dark);font-size:13.5px;color:var(--bark-soft);}
+  .pagination a.active{background:var(--clay);border-color:var(--clay);color:var(--linen);}
+
+  footer{background:var(--ink);color:#B7A88E;padding:48px 0 28px;}
+  .footer-bottom{display:flex;justify-content:space-between;font-size:12.5px;color:#7C7058;}
+
+  @media (max-width:900px){
+    nav{display:none;}
+    .filters-toggle-btn{display:inline-flex;}
+    .catalog-layout{grid-template-columns:1fr;}
+    aside.filters{display:none;position:static;}
+    #filters-toggle:checked + .catalog-layout aside.filters{display:block;}
+    .product-grid{grid-template-columns:repeat(2,1fr);}
+    .wrap{padding:0 20px;}
+  }
+  @media (max-width:560px){
+    .product-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="logo">
+      <svg class="logo-mark" viewBox="0 0 100 100">
+        <g transform="translate(50,50)">
+          <rect x="-6" y="-44" width="12" height="28" rx="2" fill="#C1652E" transform="rotate(0)"/>
+          <rect x="-6" y="-44" width="12" height="28" rx="2" fill="#B98B3E" transform="rotate(45)"/>
+          <rect x="-6" y="-44" width="12" height="28" rx="2" fill="#C1652E" transform="rotate(90)"/>
+          <rect x="-6" y="-44" width="12" height="28" rx="2" fill="#B98B3E" transform="rotate(135)"/>
+          <rect x="-6" y="-44" width="12" height="28" rx="2" fill="#C1652E" transform="rotate(180)"/>
+          <rect x="-6" y="-44" width="12" height="28" rx="2" fill="#B98B3E" transform="rotate(225)"/>
+          <rect x="-6" y="-44" width="12" height="28" rx="2" fill="#C1652E" transform="rotate(270)"/>
+          <rect x="-6" y="-44" width="12" height="28" rx="2" fill="#B98B3E" transform="rotate(315)"/>
+          <circle r="13" fill="#F3ECDF"/>
+        </g>
+      </svg>
+      <div class="logo-text">Terra Floor<span>Дизайнерские полы</span></div>
+    </div>
+    <nav>
+      <a href="terra_floor_catalog_concept.html" class="active">Ламинат</a>
+      <a href="terra_floor_engineered_board_concept.html">Инженерная доска</a>
+      <a href="terra_floor_accessories_concept.html">Аксессуары</a>
+      <a href="terra_floor_contacts_concept.html">Контакты</a>
+    </nav>
+    <div class="phone">8 800 555-01-23<small>ежедневно, 9:00–21:00</small></div>
+  </div>
+</header>
+
+<div class="wrap breadcrumb"><a href="index.html">Главная</a><span>/</span>Каталог</div>
+
+<div class="wrap catalog-head">
+  <div>
+    <h1>Каталог покрытий</h1>
+    <div class="count">Найдено 71 покрытие</div>
+  </div>
+  <div class="head-controls">
+    <label for="filters-toggle" class="btn btn-ghost-dark filters-toggle-btn">Фильтры</label>
+    <select>
+      <option>По популярности</option>
+      <option>Сначала дешевле</option>
+      <option>Сначала дороже</option>
+      <option>По коллекции</option>
+    </select>
+  </div>
+</div>
+
+<section class="catalog-section">
+  <div class="wrap">
+    <input type="checkbox" id="filters-toggle">
+    <div class="catalog-layout">
+
+      <aside class="filters">
+        <div class="filter-group">
+          <h3>Коллекция</h3>
+          <label class="filter-option"><input type="checkbox" checked>EasyStep<span class="fcount">18</span></label>
+          <label class="filter-option"><input type="checkbox" checked>Design Collection<span class="fcount">21</span></label>
+          <label class="filter-option"><input type="checkbox">Forest<span class="fcount">6</span></label>
+          <label class="filter-option"><input type="checkbox">Village<span class="fcount">6</span></label>
+          <label class="filter-option"><input type="checkbox">AQUA SPC<span class="fcount">10</span></label>
+          <label class="filter-option"><input type="checkbox">AQUA Herringbone<span class="fcount">10</span></label>
+        </div>
+
+        <div class="filter-group">
+          <h3>Цена, ₽/м²</h3>
+          <div class="price-range">
+            <input type="number" placeholder="от 2 430">
+            <input type="number" placeholder="до 3 410">
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <h3>Класс износостойкости</h3>
+          <label class="filter-option"><input type="checkbox" checked>AC5/33<span class="fcount">18</span></label>
+          <label class="filter-option"><input type="checkbox" checked>AC6/34<span class="fcount">33</span></label>
+          <label class="filter-option"><input type="checkbox">43 (SPC)<span class="fcount">20</span></label>
+        </div>
+
+        <div class="filter-group">
+          <h3>Толщина</h3>
+          <label class="filter-option"><input type="checkbox" checked>12 мм<span class="fcount">51</span></label>
+          <label class="filter-option"><input type="checkbox">4 мм<span class="fcount">20</span></label>
+        </div>
+
+        <div class="filter-group">
+          <h3>Тип укладки</h3>
+          <label class="filter-option"><input type="checkbox" checked>Английская ёлка<span class="fcount">42</span></label>
+          <label class="filter-option"><input type="checkbox">Палубная<span class="fcount">25</span></label>
+          <label class="filter-option"><input type="checkbox">Французская ёлка<span class="fcount">4</span></label>
+        </div>
+
+        <div class="filter-apply">
+          <a href="#" class="btn btn-primary">Применить</a>
+          <a href="#" class="btn btn-ghost-dark">Сбросить</a>
+        </div>
+      </aside>
+
+      <div>
+        <div class="product-grid">
+
+          <div class="cat-card">
+            <div class="cat-swatch" style="background:linear-gradient(135deg,#C1652E,#4A2E18);"><span class="cat-tag">EasyStep</span></div>
+            <div class="cat-body">
+              <div class="name">ES 185 Дуб Классик</div>
+              <div class="cat-chips"><span>AC5/33</span><span>12 мм</span></div>
+              <div class="cat-price-row"><div class="num">2 920 ₽<small> / м²</small></div><a href="#">Подробнее →</a></div>
+            </div>
+          </div>
+
+          <div class="cat-card">
+            <div class="cat-swatch" style="background:linear-gradient(135deg,#C1652E,#9C4D20);"><span class="cat-tag">EasyStep</span></div>
+            <div class="cat-body">
+              <div class="name">ES 246 Дуб Прованс</div>
+              <div class="cat-chips"><span>AC5/33</span><span>12 мм</span></div>
+              <div class="cat-price-row"><div class="num">2 670 ₽<small> / м²</small></div><a href="#">Подробнее →</a></div>
+            </div>
+          </div>
+
+          <div class="cat-card">
+            <div class="cat-swatch" style="background:linear-gradient(135deg,#C1652E,#B98B3E);"><span class="cat-tag">Design Collection</span></div>
+            <div class="cat-body">
+              <div class="name">1208, Эбби</div>
+              <div class="cat-chips"><span>AC6/34</span><span>12 мм</span></div>
+              <div class="cat-price-row"><div class="num">3 065 ₽<small> / м²</small></div><a href="#">Подробнее →</a></div>
+            </div>
+          </div>
+
+          <div class="cat-card">
+            <div class="cat-swatch" style="background:linear-gradient(135deg,#9C4D20,#B98B3E);"><span class="cat-tag">Design Collection</span></div>
+            <div class="cat-body">
+              <div class="name">DC1204, Дуб выбеленный</div>
+              <div class="cat-chips"><span>AC6/34</span><span>12 мм</span></div>
+              <div class="cat-price-row"><div class="num">3 410 ₽<small> / м²</small></div><a href="#">Подробнее →</a></div>
+            </div>
+          </div>
+
+          <div class="cat-card">
+            <div class="cat-swatch" style="background:linear-gradient(135deg,#4A2E18,#1B1108);"><span class="cat-tag">Forest</span></div>
+            <div class="cat-body">
+              <div class="name">3001, Дуб Шервудский</div>
+              <div class="cat-chips"><span>AC6/34</span><span>12 мм</span></div>
+              <div class="cat-price-row"><div class="num">3 045 ₽<small> / м²</small></div><a href="#">Подробнее →</a></div>
+            </div>
+          </div>
+
+          <div class="cat-card">
+            <div class="cat-swatch" style="background:linear-gradient(135deg,#4A2E18,#9C4D20);"><span class="cat-tag">Village</span></div>
+            <div class="cat-body">
+              <div class="name">V 1222, Oak natural</div>
+              <div class="cat-chips"><span>AC6/34</span><span>12 мм</span></div>
+              <div class="cat-price-row"><div class="num">2 430 ₽<small> / м²</small></div><a href="#">Подробнее →</a></div>
+            </div>
+          </div>
+
+          <div class="cat-card">
+            <div class="cat-swatch" style="background:linear-gradient(135deg,#B98B3E,#4A2E18);"><span class="cat-tag">Village</span></div>
+            <div class="cat-body">
+              <div class="name">V1224, Орех Канадский</div>
+              <div class="cat-chips"><span>AC6/34</span><span>12 мм</span></div>
+              <div class="cat-price-row"><div class="num">2 430 ₽<small> / м²</small></div><a href="#">Подробнее →</a></div>
+            </div>
+          </div>
+
+          <div class="cat-card">
+            <div class="cat-swatch" style="background:linear-gradient(135deg,#5B7A73,#8FA89F);"><span class="cat-tag">AQUA SPC</span></div>
+            <div class="cat-body">
+              <div class="name">AQ 106, Дуб Восточный</div>
+              <div class="cat-chips"><span>43</span><span>4 мм</span></div>
+              <div class="cat-price-row"><div class="num">2 790 ₽<small> / м²</small></div><a href="#">Подробнее →</a></div>
+            </div>
+          </div>
+
+          <div class="cat-card">
+            <div class="cat-swatch" style="background:linear-gradient(135deg,#5B7A73,#B98B3E);"><span class="cat-tag">AQUA Herringbone</span></div>
+            <div class="cat-body">
+              <div class="name">AQ205, Дуб Эннеди</div>
+              <div class="cat-chips"><span>43</span><span>4 мм</span></div>
+              <div class="cat-price-row"><div class="num">2 900 ₽<small> / м²</small></div><a href="#">Подробнее →</a></div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="pagination">
+          <a href="#" class="active">1</a>
+          <a href="#">2</a>
+          <a href="#">3</a>
+          <a href="#">→</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-bottom">
+      <span>© 2026 Terra Floor. Все права защищены.</span>
+      <span>Дизайн-концепт · страница каталога</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
