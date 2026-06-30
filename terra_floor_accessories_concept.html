@@ -82,12 +82,18 @@
     .acc-head .hint{text-align:left;}
     .wrap{padding:0 20px;}
   }
+
+  .cart-link{position:relative;display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:1.5px solid var(--linen-dark);color:var(--ink);transition:border-color .2s;}
+  .cart-link:hover{border-color:var(--clay);}
+  .cart-link svg{width:18px;height:18px;}
+  .cart-badge{position:absolute;top:-5px;right:-5px;min-width:18px;height:18px;border-radius:999px;background:var(--clay);color:#fff;font-family:'Space Grotesk',sans-serif;font-size:10.5px;font-weight:600;display:none;align-items:center;justify-content:center;padding:0 4px;}
 </style>
 </head>
 <body>
 
 <header class="site-header">
   <div class="wrap">
+    <a href="index.html" style="text-decoration:none;display:contents;">
     <div class="logo">
       <svg class="logo-mark" viewBox="0 0 100 100">
         <g transform="translate(50,50)">
@@ -104,6 +110,7 @@
       </svg>
       <div class="logo-text">Terra Floor<span>Дизайнерские полы</span></div>
     </div>
+    </a>
     <nav>
       <a href="terra_floor_catalog_concept.html">Ламинат</a>
       <a href="terra_floor_engineered_board_concept.html">Инженерная доска</a>
@@ -111,6 +118,10 @@
       <a href="terra_floor_contacts_concept.html">Контакты</a>
     </nav>
     <div class="phone">8 800 555-01-23<small>ежедневно, 9:00–21:00</small></div>
+      <a href="terra_floor_cart_checkout_concept.html" class="cart-link" aria-label="Корзина">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <span class="cart-badge" data-cart-badge>0</span>
+      </a>
   </div>
 </header>
 
@@ -133,7 +144,7 @@
         <div class="acc-body">
           <div class="name">Клей ALTO+</div>
           <div class="meta">Банка 10 кг · рабочее время ~1,5 часа после смешивания</div>
-          <div class="acc-price-row"><div class="num">6 900 ₽<small> / банка</small></div></div>
+          <div class="acc-price-row"><div class="num">6 900 ₽<small> / банка</small></div><button type="button" class="btn btn-primary" style="padding:9px 16px;font-size:12.5px;" data-add-to-cart data-id="glue-alto-2k" data-sku="Клей ALTO+ (2К)" data-collection="Аксессуары" data-name="Клей ALTO+ (2-компонентный)" data-price="6900" data-pack-area="1" data-unit="банка" data-swatch="linear-gradient(135deg,#C1652E,#B98B3E)" data-toast="Добавлено">В корзину</button></div>
         </div>
       </div>
       <div class="acc-card">
@@ -141,7 +152,7 @@
         <div class="acc-body">
           <div class="name">Клей BOHO</div>
           <div class="meta">Банка 10 кг · рабочее время ~1,5 часа после смешивания</div>
-          <div class="acc-price-row"><div class="num">9 890 ₽<small> / банка</small></div></div>
+          <div class="acc-price-row"><div class="num">9 890 ₽<small> / банка</small></div><button type="button" class="btn btn-primary" style="padding:9px 16px;font-size:12.5px;" data-add-to-cart data-id="glue-boho-2k" data-sku="Клей BOHO (2К)" data-collection="Аксессуары" data-name="Клей BOHO (2-компонентный)" data-price="9890" data-pack-area="1" data-unit="банка" data-swatch="linear-gradient(135deg,#9C4D20,#4A2E18)" data-toast="Добавлено">В корзину</button></div>
         </div>
       </div>
     </div>
@@ -160,7 +171,7 @@
         <div class="acc-body">
           <div class="name">Клей ALTO+</div>
           <div class="meta">Банка 10 кг · готов к применению</div>
-          <div class="acc-price-row"><div class="num">9 995 ₽<small> / банка</small></div></div>
+          <div class="acc-price-row"><div class="num">9 995 ₽<small> / банка</small></div><button type="button" class="btn btn-primary" style="padding:9px 16px;font-size:12.5px;" data-add-to-cart data-id="glue-alto-1k" data-sku="Клей ALTO+ (1К)" data-collection="Аксессуары" data-name="Клей ALTO+ (1-компонентный)" data-price="9995" data-pack-area="1" data-unit="банка" data-swatch="linear-gradient(135deg,#C1652E,#9C4D20)" data-toast="Добавлено">В корзину</button></div>
         </div>
       </div>
       <div class="acc-card">
@@ -168,7 +179,7 @@
         <div class="acc-body">
           <div class="name">Клей BOHO</div>
           <div class="meta">Банка 10 кг · готов к применению</div>
-          <div class="acc-price-row"><div class="num">12 550 ₽<small> / банка</small></div></div>
+          <div class="acc-price-row"><div class="num">12 550 ₽<small> / банка</small></div><button type="button" class="btn btn-primary" style="padding:9px 16px;font-size:12.5px;" data-add-to-cart data-id="glue-boho-1k" data-sku="Клей BOHO (1К)" data-collection="Аксессуары" data-name="Клей BOHO (1-компонентный)" data-price="12550" data-pack-area="1" data-unit="банка" data-swatch="linear-gradient(135deg,#4A2E18,#1B1108)" data-toast="Добавлено">В корзину</button></div>
         </div>
       </div>
     </div>
@@ -187,7 +198,7 @@
         <div class="acc-body">
           <div class="name">Грунт-покрытие ALTO+</div>
           <div class="meta">Канистра 5 кг</div>
-          <div class="acc-price-row"><div class="num">8 280 ₽<small> / канистра</small></div></div>
+          <div class="acc-price-row"><div class="num">8 280 ₽<small> / канистра</small></div><button type="button" class="btn btn-primary" style="padding:9px 16px;font-size:12.5px;" data-add-to-cart data-id="primer-alto" data-sku="Грунт ALTO+" data-collection="Аксессуары" data-name="Грунт-покрытие ALTO+" data-price="8280" data-pack-area="1" data-unit="канистра" data-swatch="linear-gradient(135deg,#B98B3E,#E8DDC8)" data-toast="Добавлено">В корзину</button></div>
         </div>
       </div>
       <div class="acc-card">
@@ -195,7 +206,7 @@
         <div class="acc-body">
           <div class="name">Грунт-покрытие BOHO</div>
           <div class="meta">Канистра 5 кг</div>
-          <div class="acc-price-row"><div class="num">9 460 ₽<small> / канистра</small></div></div>
+          <div class="acc-price-row"><div class="num">9 460 ₽<small> / канистра</small></div><button type="button" class="btn btn-primary" style="padding:9px 16px;font-size:12.5px;" data-add-to-cart data-id="primer-boho" data-sku="Грунт BOHO" data-collection="Аксессуары" data-name="Грунт-покрытие BOHO" data-price="9460" data-pack-area="1" data-unit="канистра" data-swatch="linear-gradient(135deg,#9C4D20,#B98B3E)" data-toast="Добавлено">В корзину</button></div>
         </div>
       </div>
     </div>
@@ -214,7 +225,7 @@
         <h3>Подложка ТМ BOHO</h3>
         <p>Размер листа 1100×909 мм, 10 м² в упаковке. Подходит под все коллекции SPC-линейки (AQUA SPC и AQUA Herringbone).</p>
       </div>
-      <div class="price">190 ₽<small> / м²</small></div>
+      <div style="display:flex;align-items:center;gap:16px;"><div class="price">190 ₽<small> / м²</small></div><button type="button" class="btn btn-ghost-dark" style="border-color:rgba(243,236,223,0.5);color:var(--linen);padding:11px 20px;font-size:13px;" data-add-to-cart data-id="underlay-boho" data-sku="Подложка BOHO" data-collection="Аксессуары" data-name="Подложка ЭВА 1,5 мм (BOHO)" data-price="1900" data-pack-area="10" data-unit="упаковка (10 м²)" data-swatch="linear-gradient(135deg,#B98B3E,#5B7A73)" data-toast="Добавлено">В корзину</button></div>
     </div>
   </div>
 </section>
@@ -228,5 +239,6 @@
   </div>
 </footer>
 
+<script src="cart.js"></script>
 </body>
 </html>
