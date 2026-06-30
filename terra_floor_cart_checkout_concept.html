@@ -116,12 +116,18 @@
     .wrap{padding:0 20px;}
     .stepper{flex-wrap:wrap;}
   }
+
+  .cart-link{position:relative;display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:1.5px solid var(--linen-dark);color:var(--ink);transition:border-color .2s;}
+  .cart-link:hover{border-color:var(--clay);}
+  .cart-link svg{width:18px;height:18px;}
+  .cart-badge{position:absolute;top:-5px;right:-5px;min-width:18px;height:18px;border-radius:999px;background:var(--clay);color:#fff;font-family:'Space Grotesk',sans-serif;font-size:10.5px;font-weight:600;display:none;align-items:center;justify-content:center;padding:0 4px;}
 </style>
 </head>
 <body>
 
 <header class="site-header">
   <div class="wrap">
+    <a href="index.html" style="text-decoration:none;display:contents;">
     <div class="logo">
       <svg class="logo-mark" viewBox="0 0 100 100">
         <g transform="translate(50,50)">
@@ -138,7 +144,12 @@
       </svg>
       <div class="logo-text">Terra Floor<span>Дизайнерские полы</span></div>
     </div>
+    </a>
     <div class="phone">8 800 555-01-23<small>ежедневно, 9:00–21:00</small></div>
+      <a href="terra_floor_cart_checkout_concept.html" class="cart-link" aria-label="Корзина">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <span class="cart-badge" data-cart-badge>0</span>
+      </a>
   </div>
 </header>
 
@@ -160,62 +171,19 @@
       <div class="panel">
         <h2>Ваш заказ</h2>
 
-        <div class="cart-row" data-price="3678">
-          <div class="row-thumb" style="background:linear-gradient(135deg,#C1652E,#B98B3E);"></div>
-          <div class="row-info">
-            <div class="row-collection">Design Collection</div>
-            <div class="row-name">1208, Эбби</div>
-            <div class="row-unit">3 678 ₽ / упаковка · 1,2 м²</div>
-          </div>
-          <div class="row-qty">
-            <button class="qty-btn" onclick="changeQty(this,-1)">−</button>
-            <span class="qty-val">5</span>
-            <button class="qty-btn" onclick="changeQty(this,1)">+</button>
-          </div>
-          <div class="row-total num">18 390 ₽</div>
-          <button class="row-remove" onclick="removeRow(this)">✕</button>
-        </div>
-
-        <div class="cart-row" data-price="4661">
-          <div class="row-thumb" style="background:linear-gradient(135deg,#4A2E18,#9C4D20);"></div>
-          <div class="row-info">
-            <div class="row-collection">Village</div>
-            <div class="row-name">V 1222, Oak natural</div>
-            <div class="row-unit">4 661 ₽ / упаковка · 1,918 м²</div>
-          </div>
-          <div class="row-qty">
-            <button class="qty-btn" onclick="changeQty(this,-1)">−</button>
-            <span class="qty-val">3</span>
-            <button class="qty-btn" onclick="changeQty(this,1)">+</button>
-          </div>
-          <div class="row-total num">13 983 ₽</div>
-          <button class="row-remove" onclick="removeRow(this)">✕</button>
-        </div>
-
-        <div class="cart-row" data-price="5452">
-          <div class="row-thumb" style="background:linear-gradient(135deg,#5B7A73,#B98B3E);"></div>
-          <div class="row-info">
-            <div class="row-collection">AQUA Herringbone</div>
-            <div class="row-name">AQ205, Дуб Эннеди</div>
-            <div class="row-unit">5 452 ₽ / упаковка · 1,88 м²</div>
-          </div>
-          <div class="row-qty">
-            <button class="qty-btn" onclick="changeQty(this,-1)">−</button>
-            <span class="qty-val">2</span>
-            <button class="qty-btn" onclick="changeQty(this,1)">+</button>
-          </div>
-          <div class="row-total num">10 904 ₽</div>
-          <button class="row-remove" onclick="removeRow(this)">✕</button>
-        </div>
+        <div id="cart-rows"></div>
+        <p id="cart-empty" style="display:none;color:var(--bark-soft);font-size:14px;padding:8px 0;">
+          Корзина пока пуста. <a href="terra_floor_catalog_concept.html" style="color:var(--clay-dark);font-weight:600;">Перейти в каталог →</a>
+        </p>
       </div>
 
       <!-- CONTACT -->
       <div class="panel">
         <h2>Контактные данные</h2>
         <div class="field-grid">
-          <div class="field"><label>Имя и фамилия</label><input type="text" placeholder="Анна Смирнова"></div>
-          <div class="field"><label>Телефон</label><input type="tel" placeholder="+7 ___ ___-__-__"></div>
-          <div class="field full"><label>Email</label><input type="email" placeholder="anna@mail.ru"></div>
+          <div class="field"><label>Имя и фамилия</label><input type="text" id="cust-name" placeholder="Анна Смирнова"></div>
+          <div class="field"><label>Телефон</label><input type="tel" id="cust-phone" placeholder="+7 ___ ___-__-__"></div>
+          <div class="field full"><label>Email</label><input type="email" id="cust-email" placeholder="anna@mail.ru"></div>
         </div>
       </div>
 
@@ -234,8 +202,8 @@
         </div>
 
         <div class="field-grid" style="margin-top:20px;">
-          <div class="field"><label>Город</label><input type="text" placeholder="Москва"></div>
-          <div class="field"><label>Адрес доставки</label><input type="text" placeholder="Улица, дом, квартира"></div>
+          <div class="field"><label>Город</label><input type="text" id="cust-city" placeholder="Москва"></div>
+          <div class="field"><label>Адрес доставки</label><input type="text" id="cust-address" placeholder="Улица, дом, квартира"></div>
         </div>
       </div>
 
@@ -275,7 +243,8 @@
           <span class="num" id="total-out">38 270 ₽</span>
         </div>
 
-        <a href="#" class="btn btn-primary btn-block" style="margin-top:22px;">Оформить заказ</a>
+        <button type="button" id="place-order-btn" class="btn btn-primary btn-block" style="margin-top:22px;">Оформить заказ</button>
+        <p id="order-error" style="display:none;color:var(--clay-dark);font-size:12.5px;margin-top:10px;"></p>
 
         <div class="summary-trust">
           <div><span>✓</span>Безопасная оплата через защищённое соединение</div>
@@ -300,22 +269,52 @@
 <script>
   let promoActive = false;
 
-  function changeQty(btn, delta){
-    const row = btn.closest('.cart-row');
-    const valEl = row.querySelector('.qty-val');
-    let qty = parseInt(valEl.textContent) + delta;
-    if(qty < 1) qty = 1;
-    valEl.textContent = qty;
-    const price = parseFloat(row.dataset.price);
-    row.querySelector('.row-total').textContent = Math.round(price*qty).toLocaleString('ru-RU') + ' ₽';
+  function cartRowTemplate(item) {
+    const total = Math.round(item.price * item.qty);
+    return `
+      <div class="cart-row" data-id="${item.id}">
+        <div class="row-thumb" style="background:${item.swatch || 'linear-gradient(135deg,#C1652E,#B98B3E)'};"></div>
+        <div class="row-info">
+          <div class="row-collection">${item.collection || ''}</div>
+          <div class="row-name">${item.name}</div>
+          <div class="row-unit">${Math.round(item.price).toLocaleString('ru-RU')} ₽ / ${item.unit || 'шт.'}${item.packArea ? ' · ' + item.packArea + ' м²' : ''}</div>
+        </div>
+        <div class="row-qty">
+          <button class="qty-btn" data-qty-action="dec" data-id="${item.id}">−</button>
+          <span class="qty-val">${item.qty}</span>
+          <button class="qty-btn" data-qty-action="inc" data-id="${item.id}">+</button>
+        </div>
+        <div class="row-total num">${total.toLocaleString('ru-RU')} ₽</div>
+        <button class="row-remove" data-qty-action="remove" data-id="${item.id}">✕</button>
+      </div>`;
+  }
+
+  function renderCart() {
+    const items = window.TFCart.getAll();
+    const container = document.getElementById('cart-rows');
+    const empty = document.getElementById('cart-empty');
+    if (items.length === 0) {
+      container.innerHTML = '';
+      empty.style.display = 'block';
+    } else {
+      empty.style.display = 'none';
+      container.innerHTML = items.map(cartRowTemplate).join('');
+    }
     updateSummary();
   }
 
-  function removeRow(btn){
-    const row = btn.closest('.cart-row');
-    row.style.display = 'none';
-    updateSummary();
-  }
+  document.getElementById('cart-rows').addEventListener('click', function (e) {
+    const btn = e.target.closest('[data-qty-action]');
+    if (!btn) return;
+    const id = btn.dataset.id;
+    const items = window.TFCart.getAll();
+    const item = items.find(i => i.id === id);
+    if (!item) return;
+    if (btn.dataset.qtyAction === 'inc') window.TFCart.updateQty(id, item.qty + 1);
+    else if (btn.dataset.qtyAction === 'dec') window.TFCart.updateQty(id, item.qty - 1);
+    else if (btn.dataset.qtyAction === 'remove') window.TFCart.remove(id);
+    renderCart();
+  });
 
   function applyPromo(){
     const code = document.getElementById('promo-input').value.trim().toUpperCase();
@@ -323,33 +322,82 @@
     document.getElementById('discount-row').style.display = promoActive ? 'flex' : 'none';
     updateSummary();
   }
+  document.querySelector('.promo-row .btn').addEventListener('click', applyPromo);
+
+  document.querySelectorAll('input[name="delivery"]').forEach(r => r.addEventListener('change', updateSummary));
 
   function updateSummary(){
-    const rows = document.querySelectorAll('.cart-row');
-    let subtotal = 0, packCount = 0;
-    rows.forEach(row=>{
-      if(row.style.display === 'none') return;
-      const price = parseFloat(row.dataset.price);
-      const qty = parseInt(row.querySelector('.qty-val').textContent);
-      subtotal += price*qty;
-      packCount += qty;
-    });
+    const items = window.TFCart.getAll();
+    const subtotal = items.reduce((sum, i) => sum + i.price * i.qty, 0);
+    const unitCount = items.reduce((sum, i) => sum + i.qty, 0);
 
-    const deliveryFee = parseFloat(document.querySelector('input[name="delivery"]:checked').dataset.fee) || 0;
-    const discount = promoActive ? Math.round(subtotal*0.10) : 0;
-    const total = subtotal + deliveryFee - discount;
+    const deliveryInput = document.querySelector('input[name="delivery"]:checked');
+    const deliveryFee = deliveryInput ? (parseFloat(deliveryInput.dataset.fee) || 0) : 0;
+    const discount = promoActive ? Math.round(subtotal * 0.10) : 0;
+    const total = Math.max(0, subtotal + deliveryFee - discount);
 
-    document.getElementById('subtotal-out').previousElementSibling
-      ? null : null;
-    document.querySelector('.summary-line span:first-child').textContent = 'Товары, ' + packCount + ' упак.';
+    document.querySelector('.summary-line span:first-child').textContent = 'Товары, ' + unitCount + ' ед.';
     document.getElementById('subtotal-out').textContent = subtotal.toLocaleString('ru-RU') + ' ₽';
     document.getElementById('delivery-out').textContent = deliveryFee > 0 ? deliveryFee.toLocaleString('ru-RU') + ' ₽' : 'Бесплатно';
     document.getElementById('discount-out').textContent = '−' + discount.toLocaleString('ru-RU') + ' ₽';
     document.getElementById('total-out').textContent = total.toLocaleString('ru-RU') + ' ₽';
+
+    document.getElementById('place-order-btn').disabled = items.length === 0;
   }
 
-  updateSummary();
+  document.getElementById('place-order-btn').addEventListener('click', function () {
+    const items = window.TFCart.getAll();
+    const errorEl = document.getElementById('order-error');
+    errorEl.style.display = 'none';
+
+    if (items.length === 0) {
+      errorEl.textContent = 'Корзина пуста — добавьте хотя бы один товар.';
+      errorEl.style.display = 'block';
+      return;
+    }
+    const name = document.getElementById('cust-name').value.trim();
+    const phone = document.getElementById('cust-phone').value.trim();
+    if (!name || !phone) {
+      errorEl.textContent = 'Укажите имя и телефон, чтобы мы могли связаться по заказу.';
+      errorEl.style.display = 'block';
+      return;
+    }
+
+    const subtotal = window.TFCart.subtotal();
+    const deliveryInput = document.querySelector('input[name="delivery"]:checked');
+    const deliveryFee = deliveryInput ? (parseFloat(deliveryInput.dataset.fee) || 0) : 0;
+    const deliveryLabel = deliveryInput ? deliveryInput.nextElementSibling.querySelector('.opt-title').textContent : '';
+    const paymentInput = document.querySelector('input[name="payment"]:checked');
+    const paymentLabel = paymentInput ? paymentInput.nextElementSibling.querySelector('.opt-title').textContent : '';
+    const discount = promoActive ? Math.round(subtotal * 0.10) : 0;
+    const total = Math.max(0, subtotal + deliveryFee - discount);
+
+    const order = {
+      orderNumber: 'TF-' + Date.now().toString().slice(-8),
+      date: new Date().toISOString(),
+      items: items,
+      customer: {
+        name: name,
+        phone: phone,
+        email: document.getElementById('cust-email').value.trim(),
+        city: document.getElementById('cust-city').value.trim(),
+        address: document.getElementById('cust-address').value.trim(),
+      },
+      delivery: deliveryLabel,
+      payment: paymentLabel,
+      subtotal: subtotal,
+      deliveryFee: deliveryFee,
+      discount: discount,
+      total: total,
+    };
+    localStorage.setItem('tf_last_order', JSON.stringify(order));
+    window.TFCart.clear();
+    window.location.href = 'order-confirmation.html';
+  });
+
+  document.addEventListener('DOMContentLoaded', renderCart);
 </script>
 
+<script src="cart.js"></script>
 </body>
 </html>
