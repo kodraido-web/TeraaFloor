@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Аксессуары для укладки — Terra Floor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&family=Work+Sans:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1B1108; --walnut:#4A2E18; --clay:#C1652E; --clay-dark:#9C4D20;
+    --gold:#B98B3E; --linen:#F3ECDF; --linen-dark:#E8DDC8; --bark:#2B2118; --bark-soft:#5A4B3D;
+    --radius:14px; --max:1180px;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--linen);color:var(--bark);font-family:'Work Sans', sans-serif;font-size:16px;line-height:1.6;}
+  h1,h2,h3{font-family:'Fraunces', serif;font-weight:600;margin:0;color:var(--ink);}
+  .num{font-family:'Space Grotesk', sans-serif;font-weight:600;}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 32px;}
+  a{color:inherit;text-decoration:none;}
+
+  .site-header{position:sticky;top:0;z-index:50;background:rgba(243,236,223,0.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--linen-dark);}
+  .site-header .wrap{display:flex;align-items:center;justify-content:space-between;height:76px;}
+  .logo{display:flex;align-items:center;gap:10px;}
+  .logo-mark{width:34px;height:34px;}
+  .logo-text{font-family:'Fraunces', serif;font-weight:600;font-size:20px;color:var(--ink);}
+  .logo-text span{display:block;font-family:'Work Sans',sans-serif;font-weight:500;font-size:10px;letter-spacing:3px;color:var(--clay-dark);}
+  nav{display:flex;gap:28px;}
+  nav a{font-size:14px;font-weight:500;color:var(--bark-soft);}
+  nav a.active{color:var(--clay-dark);}
+  .phone{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:15px;}
+  .phone small{display:block;font-family:'Work Sans',sans-serif;font-weight:400;font-size:11px;color:var(--bark-soft);}
+
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 22px;border-radius:999px;font-size:13.5px;font-weight:600;cursor:pointer;border:1.5px solid transparent;transition:transform .2s, background .2s;font-family:'Work Sans',sans-serif;}
+  .btn-primary{background:var(--clay);color:var(--linen);}
+  .btn-primary:hover{background:var(--clay-dark);}
+
+  .breadcrumb{padding:20px 0 0;font-size:13px;color:var(--bark-soft);}
+  .breadcrumb span{margin:0 6px;opacity:.5;}
+
+  .page-head{padding:14px 0 8px;}
+  .page-head h1{font-size:clamp(30px,4vw,42px);}
+  .page-head p{color:var(--bark-soft);margin-top:10px;max-width:560px;}
+
+  .acc-section{padding:48px 0 0;}
+  .acc-section:last-of-type{padding-bottom:80px;}
+  .acc-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:20px;border-bottom:1px solid var(--linen-dark);padding-bottom:14px;}
+  .acc-head h2{font-size:20px;}
+  .acc-head .hint{font-size:13px;color:var(--bark-soft);max-width:420px;text-align:right;}
+
+  .acc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+  .acc-card{
+    background:#fff;border:1px solid var(--linen-dark);border-radius:var(--radius);
+    padding:22px 24px;display:flex;align-items:center;gap:18px;
+  }
+  .acc-thumb{width:64px;height:64px;border-radius:12px;flex-shrink:0;}
+  .acc-body{flex:1;}
+  .acc-body .name{font-size:16px;font-weight:600;color:var(--ink);margin:0 0 4px;}
+  .acc-body .meta{font-size:12.5px;color:var(--bark-soft);margin-bottom:10px;}
+  .acc-price-row{display:flex;align-items:center;justify-content:space-between;}
+  .acc-price-row .num{font-size:18px;color:var(--ink);}
+  .acc-price-row .num small{font-family:'Work Sans',sans-serif;font-weight:500;font-size:11.5px;color:var(--bark-soft);}
+
+  .underlay-banner{
+    background:var(--ink);color:var(--linen);border-radius:var(--radius);
+    padding:28px 30px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;
+  }
+  .underlay-banner .eyebrow{font-size:11px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;}
+  .underlay-banner h3{color:var(--linen);font-size:20px;margin:8px 0 6px;}
+  .underlay-banner p{color:#CBBCA1;font-size:13.5px;margin:0;max-width:420px;}
+  .underlay-banner .price{font-size:26px;color:var(--gold);font-family:'Space Grotesk',sans-serif;font-weight:600;}
+  .underlay-banner .price small{font-size:13px;color:#CBBCA1;font-family:'Work Sans',sans-serif;}
+
+  footer{background:var(--ink);color:#B7A88E;padding:48px 0 28px;margin-top:48px;}
+  .footer-bottom{display:flex;justify-content:space-between;font-size:12.5px;color:#7C7058;}
+
+  @media (max-width:900px){
+    nav{display:none;}
+    .acc-grid{grid-template-columns:1fr;}
+    .acc-head{flex-direction:column;align-items:flex-start;gap:6px;}
+    .acc-head .hint{text-align:left;}
+    .wrap{padding:0 20px;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="logo">
+      <svg class="logo-mark" viewBox="0 0 100 100">
+        <g transform="translate(50,50)">
+          <rect x="-6" y="-44" width="12" height="28" rx="2" fill="#C1652E" transform="rotate(0)"/>
+          <rect x="-6" y="-44" width="12" height="28" rx="2" fill="#B98B3E" transform="rotate(45)"/>
+          <rect x="-6" y="-44" width="12" height="28" rx="2" fill="#C1652E" transform="rotate(90)"/>
+          <rect x="-6" y="-44" width="12" height="28" rx="2" fill="#B98B3E" transform="rotate(135)"/>
+          <rect x="-6" y="-44" width="12" height="28" rx="2" fill="#C1652E" transform="rotate(180)"/>
+          <rect x="-6" y="-44" width="12" height="28" rx="2" fill="#B98B3E" transform="rotate(225)"/>
+          <rect x="-6" y="-44" width="12" height="28" rx="2" fill="#C1652E" transform="rotate(270)"/>
+          <rect x="-6" y="-44" width="12" height="28" rx="2" fill="#B98B3E" transform="rotate(315)"/>
+          <circle r="13" fill="#F3ECDF"/>
+        </g>
+      </svg>
+      <div class="logo-text">Terra Floor<span>Дизайнерские полы</span></div>
+    </div>
+    <nav>
+      <a href="terra_floor_catalog_concept.html">Ламинат</a>
+      <a href="terra_floor_engineered_board_concept.html">Инженерная доска</a>
+      <a href="terra_floor_accessories_concept.html" class="active">Аксессуары</a>
+      <a href="terra_floor_contacts_concept.html">Контакты</a>
+    </nav>
+    <div class="phone">8 800 555-01-23<small>ежедневно, 9:00–21:00</small></div>
+  </div>
+</header>
+
+<div class="wrap breadcrumb"><a href="index.html">Главная</a><span>/</span>Аксессуары</div>
+
+<div class="wrap page-head">
+  <h1>Аксессуары для укладки</h1>
+  <p>Клей, грунт и подложка для ламината, инженерной доски и SPC-покрытий — чтобы пол держался так же надёжно, как выглядит.</p>
+</div>
+
+<section class="acc-section">
+  <div class="wrap">
+    <div class="acc-head">
+      <h2>Клей (2-компонентный)</h2>
+      <div class="hint">Универсальный, для SPC, ламината, инженерной и паркетной доски, массива, паркета, фанеры. Морозостойкий, подходит для тёплых полов. Расход ≈1 кг/м².</div>
+    </div>
+    <div class="acc-grid">
+      <div class="acc-card">
+        <div class="acc-thumb" style="background:linear-gradient(135deg,#C1652E,#B98B3E);"></div>
+        <div class="acc-body">
+          <div class="name">Клей ALTO+</div>
+          <div class="meta">Банка 10 кг · рабочее время ~1,5 часа после смешивания</div>
+          <div class="acc-price-row"><div class="num">6 900 ₽<small> / банка</small></div></div>
+        </div>
+      </div>
+      <div class="acc-card">
+        <div class="acc-thumb" style="background:linear-gradient(135deg,#9C4D20,#4A2E18);"></div>
+        <div class="acc-body">
+          <div class="name">Клей BOHO</div>
+          <div class="meta">Банка 10 кг · рабочее время ~1,5 часа после смешивания</div>
+          <div class="acc-price-row"><div class="num">9 890 ₽<small> / банка</small></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="acc-section">
+  <div class="wrap">
+    <div class="acc-head">
+      <h2>Клей (1-компонентный, силановый)</h2>
+      <div class="hint">Готов к использованию сразу, без смешивания. Дополнительно подходит для плинтусов. Морозостойкий, расход ≈1 кг/м².</div>
+    </div>
+    <div class="acc-grid">
+      <div class="acc-card">
+        <div class="acc-thumb" style="background:linear-gradient(135deg,#C1652E,#9C4D20);"></div>
+        <div class="acc-body">
+          <div class="name">Клей ALTO+</div>
+          <div class="meta">Банка 10 кг · готов к применению</div>
+          <div class="acc-price-row"><div class="num">9 995 ₽<small> / банка</small></div></div>
+        </div>
+      </div>
+      <div class="acc-card">
+        <div class="acc-thumb" style="background:linear-gradient(135deg,#4A2E18,#1B1108);"></div>
+        <div class="acc-body">
+          <div class="name">Клей BOHO</div>
+          <div class="meta">Банка 10 кг · готов к применению</div>
+          <div class="acc-price-row"><div class="num">12 550 ₽<small> / банка</small></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="acc-section">
+  <div class="wrap">
+    <div class="acc-head">
+      <h2>Грунт полиуретановый</h2>
+      <div class="hint">Наносится в 2 слоя перед укладкой на клей — выравнивает основание и улучшает адгезию. Расход ≈1 кг на 5–7 м².</div>
+    </div>
+    <div class="acc-grid">
+      <div class="acc-card">
+        <div class="acc-thumb" style="background:linear-gradient(135deg,#B98B3E,#E8DDC8);"></div>
+        <div class="acc-body">
+          <div class="name">Грунт-покрытие ALTO+</div>
+          <div class="meta">Канистра 5 кг</div>
+          <div class="acc-price-row"><div class="num">8 280 ₽<small> / канистра</small></div></div>
+        </div>
+      </div>
+      <div class="acc-card">
+        <div class="acc-thumb" style="background:linear-gradient(135deg,#9C4D20,#B98B3E);"></div>
+        <div class="acc-body">
+          <div class="name">Грунт-покрытие BOHO</div>
+          <div class="meta">Канистра 5 кг</div>
+          <div class="acc-price-row"><div class="num">9 460 ₽<small> / канистра</small></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="acc-section">
+  <div class="wrap">
+    <div class="acc-head">
+      <h2>Подложка</h2>
+      <div class="hint">Под SPC, LVT и WPC-покрытия — компенсирует мелкие неровности основания и снижает шум при ходьбе.</div>
+    </div>
+    <div class="underlay-banner">
+      <div>
+        <span class="eyebrow">ЭВА · 1,5 мм</span>
+        <h3>Подложка ТМ BOHO</h3>
+        <p>Размер листа 1100×909 мм, 10 м² в упаковке. Подходит под все коллекции SPC-линейки (AQUA SPC и AQUA Herringbone).</p>
+      </div>
+      <div class="price">190 ₽<small> / м²</small></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-bottom">
+      <span>© 2026 Terra Floor. Все права защищены.</span>
+      <span>Дизайн-концепт · аксессуары</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
